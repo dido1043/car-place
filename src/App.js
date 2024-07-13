@@ -38,7 +38,7 @@ function App() {
         <div
           className="App-link"
         >
-          <button onClick={postRegister}> Learn React </button>
+          <button onClick={postRegister}> Register </button>
 
         </div>
       </header>
