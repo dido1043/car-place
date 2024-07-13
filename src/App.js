@@ -5,7 +5,7 @@ import './App.css';
 
 function App() {
   const postRegister = async () => {
-
+    const data = { registration: { email: 'asd@asd.bg', password:'asdfghjkj' } };
     try {
 
       const response = await fetch('https://localhost:7290/register',
@@ -15,10 +15,8 @@ function App() {
            'Content-Type': 'application/json',
            'Accept': '*/*' 
           },
-          body: {
-            email: 'user@user.com',
-            pass: 'password123'
-          }
+          body: JSON.stringify(data)
+          
         }
       )
       console.log(response);
