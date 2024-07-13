@@ -5,7 +5,10 @@ import './App.css';
 
 function App() {
   const postRegister = async () => {
-    const data = { registration: { email: 'asd@asd.bg', password:'asdfghjkj' } };
+    const data = {
+      "email": "testUser@dsa.bg",
+      "password": "pAsSds32123"
+    };
     try {
 
       const response = await fetch('https://localhost:7290/register',
