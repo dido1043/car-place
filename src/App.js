@@ -11,7 +11,6 @@ function App() {
    
     <Router>
       <div>
-      <h1 className='text-3xl font-bold '>Car Place</h1>
         <Header/>
         <Routes>
           <Route path="/cars" element={<Cars />} />
