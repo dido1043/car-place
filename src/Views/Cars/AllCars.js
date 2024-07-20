@@ -29,7 +29,7 @@ function AllCars() {
       <h2>All cars</h2>
       {cars.map((car, index) => (
         <div key={index} >
-          <CarCard car={car} />
+          <CarCard car={car}/>
         </div>
         
       ))}
