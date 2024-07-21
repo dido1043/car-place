@@ -28,12 +28,10 @@
       "react-app/jest"
     ],
     "rules": {
-      "rules": {
-        "no-console": "warn",
-        "arrow-parens": "warn",
-        "no-unused-vars": "warn",
-        "prefer-const": "warn"
-      }
+      "no-console": "warn",
+      "arrow-parens": "warn",
+      "no-unused-vars": "warn",
+      "prefer-const": "warn"
     }
   },
   "browserslist": {
