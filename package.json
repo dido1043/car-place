@@ -30,18 +30,8 @@
     "rules": {
       "rules": {
         "no-console": "warn",
-        "arrow-parens": [
-          "warn",
-          "always"
-        ],
-        "no-unused-vars": [
-          "warn",
-          {
-            "vars": "all",
-            "args": "after-used",
-            "ignoreRestSiblings": false
-          }
-        ],
+        "arrow-parens": "warn",
+        "no-unused-vars": "warn",
         "prefer-const": "warn"
       }
     }
