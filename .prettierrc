@@ -1,12 +1,15 @@
 {
-    "semi": false,
-    "trailingComma": "es5",
-    "singleQuote": false,
-    "printWidth": 80,
-    "tabWidth": 2,
-    "jsxSingleQuote": false,
-    "bracketSpacing": true,
-    "jsxBracketSameLine": false,
-    "arrowParens": "avoid",
-    "endOfLine": "lf"
-  }
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "prettier.singleQuote": true,
+  "prettier.semi": false,
+  "prettier.printWidth": 80,
+  "prettier.tabWidth": 2,
+  "prettier.jsxSingleQuote": false,
+  "prettier.bracketSpacing": true,
+  "prettier.jsxBracketSameLine": false,
+  "prettier.arrowParens": "avoid",
+  "prettier.endOfLine": "lf"
+}
