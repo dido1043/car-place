@@ -1,20 +1,23 @@
 
-import axios from 'axios';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Cars from './Views/Cars/Cars'
-import AllCars from './Views/Cars/AllCars';
 import Header from './Components/Navigation/Header';
+
+// Views
+import Cars from './Views/Cars'
+import AllCars from './Views/AllCars';
+import Register from "./Views/Register"
+// -----
+
 function App() {
   return (
-   
     <Router>
       <div>
         <Header/>
         <Routes>
           <Route path="/cars" element={<Cars />} />
           <Route path="/allCars" element={<AllCars />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </div>
     </Router>

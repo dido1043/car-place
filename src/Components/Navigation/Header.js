@@ -1,15 +1,37 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import "../../assests/scss/header.scss"
+import logoRight from '../../assests/images/logo.webp';
+import logoLeft from '../../assests/images/logo2.webp';
 
 function Header() {
-    return (
 
-        <nav className="bg-blue">
-            <h1 className='text-2xl font-bold text-purple'>Car Place</h1>   
-            <ul>
-                <Link to="/cars" className="link"> Cars </Link>
-                <Link to="/allCars" className="link">All </Link>
-            </ul>
+    const menuItems = [
+        {   
+            path: "/cars",
+            name: "Cars"
+        },
+        {
+            path: "/allCars",
+            name: "All"
+        },
+        {
+            path: "/register",
+            name: "Register"
+        },
+    ]
+    
+    return (
+        <nav className="menu">
+            <img src={logoLeft} alt="Logo" className="logo-left" />
+            <img src={logoRight} alt="Logo" className="logo-right" />
+                {menuItems.map(item => (
+                    <li key={item.path}>
+                        <Link to={item.path} className="menu-item">
+                            {item.name}
+                        </Link>
+                    </li>
+                ))}
         </nav>
     )
 }

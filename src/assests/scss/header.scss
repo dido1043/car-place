@@ -1,0 +1,41 @@
+@import "./variables.scss";
+
+.menu {
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 52%, rgba(0,212,255,1) 100%);
+  padding: 28px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+
+  .logo-right {
+    margin: 16px 0 0 0;
+    position: absolute;
+    right: 8px;
+    transform: translateY(-50%);
+    height: 50px;
+  }
+
+  .logo-left {
+    margin: 16px 0 0 0;
+    position: absolute;
+    left: 24px;
+    transform: translateY(-50%);
+    height: 200px;
+  }
+
+  .menu-item {
+    background-color: $gray;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $item-bg-hover;
+    }
+
+    &:active {
+      background-color: $item-bg-active;
+    }
+  }
+}
