@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios'
 
 function RegisterForm() {
 
@@ -30,17 +31,12 @@ function RegisterForm() {
         const formErrors = validateForm();
         if (Object.keys(formErrors).length === 0) {
             try {
-                const response = fetch(`${process.env.REACT_APP_API_KEY}/register`,
-                    {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': '*/*'
-                        },
-                        body: JSON.stringify(formData)
-
+                const response = axios.post(`${process.env.REACT_APP_API_KEY}/register`, formData, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': '*/*'
                     }
-                )
+                })
                 console.log(response);
             } catch (error) {
                 console.log(error);

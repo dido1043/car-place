@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import CarCard from "../Components/CarsCard"
+import axios from 'axios'
 
 function AllCars() {
   const [cars, setCars] = useState([])
@@ -7,17 +8,13 @@ function AllCars() {
   useEffect(() => {
     const showCars = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_KEY}/cars`,
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': '/'
-            },
+        const response = await axios.get(`${process.env.REACT_APP_API_KEY}/cars`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': '*/*'
           }
-        )
-        const jsonData = await response.json();
-        setCars(jsonData)
+        });
+        setCars(response.data);
       } catch (error) {
         console.log(error);
       }
