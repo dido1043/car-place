@@ -30,7 +30,7 @@ function RegisterForm() {
         const formErrors = validateForm();
         if (Object.keys(formErrors).length === 0) {
             try {
-                const response = fetch('https://localhost:7290/register',
+                const response = fetch(`${process.env.REACT_APP_API_KEY}/register`,
                     {
                         method: 'POST',
                         headers: {

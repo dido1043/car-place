@@ -7,7 +7,7 @@ function AllCars() {
   useEffect(() => {
     const showCars = async () => {
       try {
-        const response = await fetch('https://localhost:7290/cars',
+        const response = await fetch(`${process.env.REACT_APP_API_KEY}/cars`,
           {
             method: 'GET',
             headers: {
