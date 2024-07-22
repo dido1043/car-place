@@ -3,6 +3,7 @@ import axios from 'axios'
 import Label from '../Shared/Label';
 import BaseButton from '../Shared/BaseButton'
 import InputField from '../Shared/InputField';
+import "../../assests/scss/register.scss"
 function RegisterForm() {
 
     const [formData, setFormData] = useState({
