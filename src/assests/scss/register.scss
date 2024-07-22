@@ -3,18 +3,35 @@
 .register-form {
   background-color: $gray;
   display: flex;
-  width: 100%;      
-  height: 100%;    
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 800px;
   .box {
-    background-color: $sky-blue;
+    background-color: $white;
     display: grid;
-    margin: auto;
     place-items: center;
-    width: 50%;
+    padding: 48px 16px;
+    width: 33%;
+    border: 1px solid rgb(182, 185, 187);
+    border-radius: $border-radius;
     .header {
+      height: 100px;
+      width: 100%;
+    }
+    .body {
+      display: flex;
+      justify-items: start;
+      height: 100%;
+      width: 100%;
+      .form {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        div > input {
+          width: 100%;
+        }
+      }
     }
   }
 }

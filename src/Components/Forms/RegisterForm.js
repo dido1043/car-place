@@ -56,14 +56,20 @@ function RegisterForm() {
     return (
         <div className="register-form">
             <div className='box'>
-                <h2 className="header">Register</h2>
-                <form onSubmit={handleSubmit} className='flex flex-col justify-items-center items-center'>
-                    <Label text='Email' />
-                    <InputField name="email" value={formData.email} onChange={handleChange} placeholder="Enter email" type="text" error={errors.email} />
-                    <Label text='Password' />
-                    <InputField name="password" value={formData.password} onChange={handleChange} placeholder="Enter email" type="password" error={errors.password} />
-                    <BaseButton text="Submit" type="submit" />
-                </form>
+                <div className="header flex justify-center items-center">
+                    <h2 >Register</h2>
+
+                </div>
+                <div className='body'>
+                    <form onSubmit={handleSubmit} className='form'>
+                        <Label text='Email' />
+                        <InputField name="email" value={formData.email} onChange={handleChange} placeholder="Enter email" type="text" error={errors.email} />
+                        <Label text='Password' />
+                        <InputField name="password" value={formData.password} onChange={handleChange} placeholder="Enter email" type="password" error={errors.password} />
+                        <BaseButton text="Submit" type="submit" />
+                    </form>
+                </div>
+
             </div>
         </div>
 
