@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios'
-
+import Label from '../Shared/Label';
+import BaseButton from '../Shared/BaseButton'
+import InputField from '../Shared/InputField';
 function RegisterForm() {
 
     const [formData, setFormData] = useState({
@@ -12,11 +14,13 @@ function RegisterForm() {
     const [errors, setErrors] = useState({});
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const name = e.target.name
+        const value = e.target.value
         setFormData({
             ...formData,
             [name]: value,
         });
+        console.log(e.target);
     };
 
     const validateForm = () => {
@@ -27,6 +31,7 @@ function RegisterForm() {
     };
 
     const handleSubmit = (e) => {
+        setErrors([]);
         e.preventDefault();
         const formErrors = validateForm();
         if (Object.keys(formErrors).length === 0) {
@@ -38,6 +43,7 @@ function RegisterForm() {
                     }
                 })
                 console.log(response);
+                
             } catch (error) {
                 console.log(error);
             }
@@ -47,10 +53,14 @@ function RegisterForm() {
     };
 
     return (
-        <div className="flex flex-col items-center">
-            <h2 className="text-xl font-bold mb-4 mt-2">Register</h2>
-            <form onSubmit={handleSubmit} >
-                {/* TODO: create component Label(expect text) Input field(expect value,name,onChange="handleChange",palceholder) and button */}
+        <div className="register-form">
+            <h2 className="header">Register</h2>
+            <form onSubmit={handleSubmit} className='flex flex-col'>
+                <Label text='Email'/>
+                <InputField name="email" value={formData.email} onChange={handleChange} placeholder="Enter email" type="text" error={errors.email}/>
+                <Label text='Password'/>
+                <InputField name="password" value={formData.password} onChange={handleChange} placeholder="Enter email" type="password" error={errors.password}/>
+                <BaseButton text="Submit" type="submit"/>
             </form>
         </div>
     )
