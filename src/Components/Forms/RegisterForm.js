@@ -43,7 +43,7 @@ function RegisterForm() {
                     }
                 })
                 console.log(response);
-                
+
             } catch (error) {
                 console.log(error);
             }
@@ -54,15 +54,18 @@ function RegisterForm() {
 
     return (
         <div className="register-form">
-            <h2 className="header">Register</h2>
-            <form onSubmit={handleSubmit} className='flex flex-col'>
-                <Label text='Email'/>
-                <InputField name="email" value={formData.email} onChange={handleChange} placeholder="Enter email" type="text" error={errors.email}/>
-                <Label text='Password'/>
-                <InputField name="password" value={formData.password} onChange={handleChange} placeholder="Enter email" type="password" error={errors.password}/>
-                <BaseButton text="Submit" type="submit"/>
-            </form>
+            <div className='box'>
+                <h2 className="header">Register</h2>
+                <form onSubmit={handleSubmit} className='flex flex-col justify-items-center items-center'>
+                    <Label text='Email' />
+                    <InputField name="email" value={formData.email} onChange={handleChange} placeholder="Enter email" type="text" error={errors.email} />
+                    <Label text='Password' />
+                    <InputField name="password" value={formData.password} onChange={handleChange} placeholder="Enter email" type="password" error={errors.password} />
+                    <BaseButton text="Submit" type="submit" />
+                </form>
+            </div>
         </div>
+
     )
 }
 

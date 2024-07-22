@@ -1,5 +1,9 @@
 @import "./variables.scss";
 
-.register-form{
-    background-color: $gray;
+.register-form {
+  background-color: $gray;
+  .box {
+    .header {
+    }
+  }
 }
