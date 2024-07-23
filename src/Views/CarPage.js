@@ -13,8 +13,8 @@ const CarPage = () => {
         year: ''
     });
     const { id } = useParams();
-    const location = useLocation().state;
-    const { car } = location;
+    const car = useLocation().state;
+   
     console.log(car);
     //const deleteCar = (id) => {
     //    try {
