@@ -1,14 +1,10 @@
 import React from "react";
 import '../assests/scss/card.scss'
-import { Link } from "react-router-dom";
 
 function CarCard({ car }) {
     return (
         <div className="container">
-            <Link to={{
-                pathname: `cars/${car.id}`,
-                state: {car}
-            }} className="menu-item">
+            
                 <div className="car-card">
 
                     <div className="car-tumb">
@@ -29,7 +25,6 @@ function CarCard({ car }) {
 
                     </div>
                 </div>
-            </Link>
         </div >
     )
 
