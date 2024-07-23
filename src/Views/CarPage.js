@@ -1,5 +1,5 @@
-import React, { useState, useLocation } from 'react'
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react'
+import { useParams, useLocation } from 'react-router-dom';
 import axios from 'axios'
 import BaseButton from '../Components/Shared/BaseButton';
 import CarCard from "../Components/CarsCard"
@@ -12,6 +12,7 @@ const CarPage = () => {
         price: '',
         year: ''
     });
+    const { id } = useParams();
     const location = useLocation();
     const { car } = location.state || {};
 
