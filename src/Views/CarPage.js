@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
-import { useParams, useLocation } from 'react-router-dom';
-import axios from 'axios'
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 import BaseButton from '../Components/Shared/BaseButton';
-import CarCard from "../Components/CarsCard"
-
+import CarCard from "../Components/CarsCard";
 
 const CarPage = () => {
     const [formData, setFormData] = useState({
@@ -12,49 +11,30 @@ const CarPage = () => {
         price: '',
         year: ''
     });
-    const { id } = useParams();
-    const car = useLocation().state;
-   
-    console.log(car);
-    //const deleteCar = (id) => {
-    //    try {
-    //        const response = axios.delete(`${process.env.REACT_APP_API_KEY}/cars/delete/${id}`, {
-    //            headers: {
-    //                'Content-Type': 'application/json',
-    //                'Accept': '*/*'
-    //            }
-    //        })
-    //        console.log(response);
-//
-    //    } catch (error) {
-    //        console.log(error);
-   //     }
-    //}
+    const location = useLocation().state;
+    const [car, setCar] = useState(location);
 
-    //const editCar = (id) => {
-    //    try {
-    //        const response = axios.put(`${process.env.REACT_APP_API_KEY}/cars/edit/${id}`, {
-    //            headers: {
-    //                'Content-Type': 'application/json',
-    //                'Accept': '*/*'
-    //            }
-    //        })
-    //        console.log(response);
-//
-    //    } catch (error) {
-    //        console.log(error);
-    //    }
-    //}
-    //setFormData(car)
+    useEffect(() => {
+        if (location) {
+            setCar(location);
+        }
+    }, [location]);
+
+
 
     return (
         <div>
-            {/* <CarCard car={car} /> */}
-            <div>{car}</div>
-            {/* <BaseButton onClick={editCar()} text="Edit"> </BaseButton> */}
-            {/* <BaseButton onClick={deleteCar()} text="Delete"> </BaseButton> */}
+            <div>
+                <img src={car.imageUrl}/>
+                <h1>{car.make}</h1>
+                <p>Model: {car.model}</p>
+                <p>Year: {car.year}</p>
+                <p>Price: {car.price}</p>
+            </div>
+            {/* <BaseButton onClick={editCar()} text="Edit"> </BaseButton> /}
+            {/ <BaseButton onClick={deleteCar()} text="Delete"> </BaseButton> */}
         </div>
     );
 };
 
-export default CarPage
+export default CarPage;
