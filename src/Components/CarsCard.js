@@ -5,12 +5,17 @@ import { Link } from "react-router-dom";
 function CarCard({ car }) {
     return (
         <div className="container">
-            <div className="car-card">
-                <div className="car-tumb">
-                    <img src={car.imageUrl} className="" />
-                </div>
-                <div className="car-details">
-                    <Link to={`cars/${car.id}`} className="menu-item">
+            <Link to={{
+                pathname: `cars/${car.id}`,
+                state: {car}
+            }} className="menu-item">
+                <div className="car-card">
+
+                    <div className="car-tumb">
+                        <img src={car.imageUrl} className="" />
+                    </div>
+                    <div className="car-details">
+
                         <h4>{car.make}</h4>
                         <p>{car.model}</p>
                         <div className="car-bottom-details">
@@ -21,10 +26,11 @@ function CarCard({ car }) {
                                 <a href=""><i className="fa fa-heart"></i></a>
                             </div>
                         </div>
-                    </Link>
+
+                    </div>
                 </div>
-            </div>
-        </div>
+            </Link>
+        </div >
     )
 
 }
