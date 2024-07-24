@@ -18,8 +18,8 @@ function CarCard({ car }) {
                             <div className="car-price">Price:{car.price}$</div>
                             <div className="car-price">Year:{car.year}</div>
                             <div className="car-links">
-                                <i class="fi fi-rr-user"></i>
-                                <a href=""><i className="fa fa-heart"></i></a>
+                                <i className="fi fi-rr-user"></i>
+                                
                             </div>
                         </div>
 

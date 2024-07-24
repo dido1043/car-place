@@ -12,6 +12,10 @@ function Header() {
             name: "Cars"
         },
         {
+            path:"/cars/add",
+            name:"Add"
+        },
+        {
             path: "/allCars",
             name: "All"
         },
