@@ -7,8 +7,8 @@ function AddCarForm() {
     const [carFormData, setCarData] = useState({
         make: '',
         model: '',
-        price: '',
         year: '',
+        price: '',
         imageUrl: ''
     });
     const [errors, setErrors] = useState({});
@@ -18,8 +18,9 @@ function AddCarForm() {
         const value = e.target.value;
         setCarData({
             ...carFormData,
-            [name]: value,
+            [name]: name == "year" ? parseInt(value, 10) : name == "price" ? parseFloat(value) : value
         });
+
 
     }
     //Error validations 
