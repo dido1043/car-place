@@ -52,7 +52,7 @@ function RegisterForm() {
             } catch (error) {
                 setHandleError({
                     status: error?.response?.status,
-                    message: error?.response?.data.message
+                    message: error?.response?.data?.message
                 })
             }
         } else {
@@ -74,6 +74,7 @@ function RegisterForm() {
                         <Label text='Password:' />
                         <InputField name="password" value={formData.password} onChange={handleChange} placeholder="Enter password" type="password" error={errors.password} />
                         {/* TODO: ADD ERROR/SUCCESS COMPONENT (Expet error={handleError}" success...) */}
+                        {/* TODO: component ->  https://prnt.sc/s3fjjVjetFC3 */}
                         <div className="flex justify-center items-center mt-2">
                             <BaseButton text="Submit" type="submit" />
                         </div>
