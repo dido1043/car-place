@@ -26,7 +26,7 @@ function AllCars() {
   return (
     <div className="container ">
       <h2 className="text-3xl font-bold mb-4 text-center	">All cars</h2>
-      <div className="flex flex-row justify-center">
+      <div className="flex flex-wrap justify-center">
 
         {cars.length > 0 ? (
           cars.map((car, index) => (
