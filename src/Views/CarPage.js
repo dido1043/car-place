@@ -20,12 +20,38 @@ const CarPage = () => {
         }
     }, [location]);
 
+    const editCar = async () => {
+        try {
+            const response = await axios.put(`${process.env.REACT_APP_API_KEY}/cars/${car.id}`, formData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*'
+                }
+            });
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
+    const deleteCar = async () => {
+        try {
+            const response = await axios.delete(`${process.env.REACT_APP_API_KEY}/cars/${car.id}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*'
+                }
+            });
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <div>
             <div>
-                <img src={car.imageUrl}/>
+                <img src={car.imageUrl} />
                 <h1>{car.make}</h1>
                 <p>Model: {car.model}</p>
                 <p>Year: {car.year}</p>

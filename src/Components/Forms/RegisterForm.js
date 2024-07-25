@@ -14,6 +14,13 @@ function RegisterForm() {
 
     const [errors, setErrors] = useState({});
 
+    const [handleError, setHandleError] = useState({
+        status: '',
+        message: ''
+    });
+
+    // TODO: Add same for success message
+
     const handleChange = (e) => {
         const name = e.target.name
         const value = e.target.value
@@ -21,7 +28,6 @@ function RegisterForm() {
             ...formData,
             [name]: value,
         });
-        console.log(e.target);
     };
 
     const validateForm = () => {
@@ -37,16 +43,17 @@ function RegisterForm() {
         const formErrors = validateForm();
         if (Object.keys(formErrors).length === 0) {
             try {
-                const response = axios.post(`${process.env.REACT_APP_API_KEY}/register`, formData, {
+                axios.post(`${process.env.REACT_APP_API_KEY}/register`, formData, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': '*/*'
                     }
                 })
-                console.log(response);
-
             } catch (error) {
-                console.log(error);
+                setHandleError({
+                    status: error?.response?.status,
+                    message: error?.response?.data.message
+                })
             }
         } else {
             setErrors(formErrors);
@@ -62,11 +69,14 @@ function RegisterForm() {
                 </div>
                 <div className='body'>
                     <form onSubmit={handleSubmit} className='form'>
-                        <Label text='Email' />
+                        <Label text='Email:' />
                         <InputField name="email" value={formData.email} onChange={handleChange} placeholder="Enter email" type="text" error={errors.email} />
-                        <Label text='Password' />
-                        <InputField name="password" value={formData.password} onChange={handleChange} placeholder="Enter email" type="password" error={errors.password} />
-                        <BaseButton text="Submit" type="submit" />
+                        <Label text='Password:' />
+                        <InputField name="password" value={formData.password} onChange={handleChange} placeholder="Enter password" type="password" error={errors.password} />
+                        {/* TODO: ADD ERROR/SUCCESS COMPONENT (Expet error={handleError}" success...) */}
+                        <div className="flex justify-center items-center mt-2">
+                            <BaseButton text="Submit" type="submit" />
+                        </div>
                     </form>
                 </div>
 

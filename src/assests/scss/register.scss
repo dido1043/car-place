@@ -8,14 +8,14 @@
   position: fixed;
   top: 80px;
   left: 0;
-  bottom:0;
-  right:0;
+  bottom: 0;
+  right: 0;
   .box {
     background-color: $white;
     display: grid;
     place-items: center;
     padding: 48px 16px;
-    width: 33%;
+    width: 30%;
     border: 1px solid rgb(182, 185, 187);
     border-radius: $border-radius;
     .header {

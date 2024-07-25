@@ -1,0 +1,21 @@
+@import "../variables.scss";
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: $blue;
+  width: 33%;
+  color: $white;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.3s;
+  font-size: large;
+  font-family: sans-serif;
+  &:hover {
+    background-color: $sky-blue;
+  }
+}

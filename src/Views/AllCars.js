@@ -5,6 +5,11 @@ import { Link } from "react-router-dom"
 function AllCars() {
   const [cars, setCars] = useState([])
 
+  const [handleError, setHandleError] = useState({
+    status: '',
+    message: ''
+  });
+
   useEffect(() => {
     const showCars = async () => {
       try {
@@ -16,7 +21,10 @@ function AllCars() {
         });
         setCars(response.data);
       } catch (error) {
-        console.log(error);
+        setHandleError({
+          status: error?.response?.status,
+          message: error?.response?.data.message
+        })
       }
     };
 
@@ -32,15 +40,16 @@ function AllCars() {
           cars.map((car, index) => (
             <div key={index} className="m-4">
               <Link to={{
-                pathname: `cars/${car.id}`}}
-                state= { car }
-               className="menu-item">
+                pathname: `cars/${car.id}`
+              }}
+                state={car}
+                className="menu-item">
                 <CarCard car={car} />
               </Link>
             </div>
           ))
         ) : (
-          <p>No cars available.</p>
+          <p>No cars available. {handleError}</p>
         )}
       </div>
     </div>
