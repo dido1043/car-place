@@ -10,6 +10,7 @@ import AllCars from './Views/AllCars';
 import Register from "./Views/Register"
 import CarPage from "./Views/CarPage"
 import AddCar from './Views/AddCar';
+
 // -----
 
 function App() {
