@@ -30,7 +30,7 @@ function AddCarForm() {
         if (!carFormData.model) errors.model = "Invalid car model!"
         if (!carFormData.price) errors.price = "Invalid car price!"
         if (!carFormData.year) errors.year = "Invalid year of creation!"
-        if (!carFormData.imageUrl) errors.year = "Invalid image url!"
+        if (!carFormData.imageUrl) errors.imageUrl = "Invalid image url!"
         return errors;
 
     }
