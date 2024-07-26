@@ -20,6 +20,11 @@ function RegisterForm() {
     });
 
     // TODO: Add same for success message
+    const [handleSuccess, setHandleSuccess] = useState({
+        icon:'fi fi-success',
+        status: 'Success',
+        message: 'Successful register!'
+    })
 
     const handleChange = (e) => {
         const name = e.target.name
@@ -48,7 +53,8 @@ function RegisterForm() {
                         'Content-Type': 'application/json',
                         'Accept': '*/*'
                     }
-                })
+                }).then()
+                alert("Success registration!")
             } catch (error) {
                 setHandleError({
                     status: error?.response?.status,

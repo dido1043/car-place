@@ -3,6 +3,7 @@ import Label from "../Shared/Label";
 import InputField from "../Shared/InputField";
 import axios from "axios";
 import BaseButton from "../Shared/BaseButton";
+import { toast } from "react-toastify";
 function AddCarForm() {
     const [carFormData, setCarData] = useState({
         make: '',
@@ -11,6 +12,13 @@ function AddCarForm() {
         price: '',
         imageUrl: ''
     });
+    const clearForm = () => {
+        carFormData.make = '';
+        carFormData.model = '';
+        carFormData.year = '';
+        carFormData.price = '';
+        carFormData.imageUrl = '';
+    }
     const [errors, setErrors] = useState({});
 
     const handleChange = (e) => {
@@ -47,14 +55,26 @@ function AddCarForm() {
                         'Accept': '*/*'
                     }
                 });
+                setCarData({
+                    make: '',
+                    model: '',
+                    year: '',
+                    price: '',
+                    imageUrl: ''
+                })
                 console.log(response);
+                
+
             } catch (error) {
                 console.log(error);
             }
         } else {
             setErrors(carFormErrors)
         }
+        
     }
+
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -80,6 +100,5 @@ function AddCarForm() {
         </div>
 
     )
-
 }
 export default AddCarForm
