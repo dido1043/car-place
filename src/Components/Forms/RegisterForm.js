@@ -4,8 +4,9 @@ import Label from '../Shared/Label';
 import BaseButton from '../Shared/BaseButton'
 import InputField from '../Shared/InputField';
 import "../../assests/scss/register.scss"
+import StatusComponent from '../Shared/StatusComponent';
 function RegisterForm() {
-
+    
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -21,7 +22,7 @@ function RegisterForm() {
 
     // TODO: Add same for success message
     const [handleSuccess, setHandleSuccess] = useState({
-        icon:'fi fi-success',
+        icon: 'fi fi-success',
         status: 'Success',
         message: 'Successful register!'
     })
@@ -47,25 +48,40 @@ function RegisterForm() {
         e.preventDefault();
         const formErrors = validateForm();
         if (Object.keys(formErrors).length === 0) {
-            try {
+            new Promise((resolve, reject) => {
                 axios.post(`${process.env.REACT_APP_API_KEY}/register`, formData, {
                     headers: {
                         'Content-Type': 'application/json',
-                        'Accept': '*/*'
+                        'Accept': '/'
                     }
-                }).then()
-                alert("Success registration!")
-            } catch (error) {
-                setHandleError({
-                    status: error?.response?.status,
-                    message: error?.response?.data?.message
                 })
-            }
+                    .then(response => resolve(response))
+                    .catch(error => reject(error));
+            }).then((response) => {
+                setHandleSuccess({
+                    icon: 'fi fi-success',
+                    status: 'Success',
+                    message: 'Successful register!'
+                })
+                
+                console.log(handleSuccess);
+                console.log(response);
+            }).catch((error) => {
+                setHandleError({
+                    icon: "fi fi-rr-warning",
+                    status: "Error",
+                    message: error?.response?.data?.message
+                });
+            });
+            setFormData({
+                email: '',
+                password: '',
+
+            })
         } else {
             setErrors(formErrors);
         }
     };
-
     return (
         <div className="register-form">
             <div className='box'>
@@ -81,14 +97,22 @@ function RegisterForm() {
                         <InputField name="password" value={formData.password} onChange={handleChange} placeholder="Enter password" type="password" error={errors.password} />
                         {/* TODO: ADD ERROR/SUCCESS COMPONENT (Expet error={handleError}" success...) */}
                         {/* TODO: component ->  https://prnt.sc/s3fjjVjetFC3 */}
+
                         <div className="flex justify-center items-center mt-2">
+                            {Object.keys(validateForm()).length === 0 ?
+                                <StatusComponent icon={handleSuccess.icon} status={handleSuccess.status} message={handleSuccess.message} />
+                                 : <StatusComponent icon={handleError.icon} status={handleError.status} message={handleError.message} />
+                            }
+                            
                             <BaseButton text="Submit" type="submit" />
                         </div>
+
+
                     </form>
                 </div>
 
-            </div>
-        </div>
+            </div >
+        </div >
 
     )
 }
