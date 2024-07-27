@@ -19,7 +19,7 @@ function RegisterForm() {
         status: '',
         message: ''
     });
-
+    const [register, setRegister] = useState(false);
     // TODO: Add same for success message
     const [handleSuccess, setHandleSuccess] = useState({
         icon: 'fi fi-success',
@@ -63,7 +63,7 @@ function RegisterForm() {
                     status: 'Success',
                     message: 'Successful register!'
                 })
-                
+                setRegister(true);
                 console.log(handleSuccess);
                 console.log(response);
             }).catch((error) => {
@@ -99,7 +99,7 @@ function RegisterForm() {
                         {/* TODO: component ->  https://prnt.sc/s3fjjVjetFC3 */}
 
                         <div className="flex justify-center items-center mt-2">
-                            {Object.keys(validateForm()).length === 0 ?
+                            {register?
                                 <StatusComponent icon={handleSuccess.icon} status={handleSuccess.status} message={handleSuccess.message} />
                                  : <StatusComponent icon={handleError.icon} status={handleError.status} message={handleError.message} />
                             }
