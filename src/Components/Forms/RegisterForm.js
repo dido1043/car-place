@@ -97,13 +97,11 @@ function RegisterForm() {
                         <InputField name="password" value={formData.password} onChange={handleChange} placeholder="Enter password" type="password" error={errors.password} />
                         {/* TODO: ADD ERROR/SUCCESS COMPONENT (Expet error={handleError}" success...) */}
                         {/* TODO: component ->  https://prnt.sc/s3fjjVjetFC3 */}
-
-                        <div className="flex justify-center items-center mt-2">
                             {register?
                                 <StatusComponent icon={handleSuccess.icon} status={handleSuccess.status} message={handleSuccess.message} />
                                  : <StatusComponent icon={handleError.icon} status={handleError.status} message={handleError.message} />
                             }
-                            
+                        <div className="flex justify-center items-center mt-2">                            
                             <BaseButton text="Submit" type="submit" />
                         </div>
 
