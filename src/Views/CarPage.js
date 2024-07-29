@@ -30,7 +30,7 @@ const CarPage = () => {
     }, [location]);
 
     const editCar = async () => {
-        
+
         try {
             const response = await axios.put(`${process.env.REACT_APP_API_KEY}/cars/edit/${car.id}`, formData, {
                 headers: {
@@ -66,21 +66,28 @@ const CarPage = () => {
         });
     }
 
+    const toggleEdit = () => {
+        setIsBtnClicked(!isBtnClicked);
+    }
+
     return (
         <div>
-            <div>
-                <img src={car.imageUrl} alt={`${car.make} ${car.model}`} />
-                <h1>{car.make}</h1>
-                <p>Model: {car.model}</p>
-                <p>Year: {car.year}</p>
-                <p>Price: {car.price}</p>
-            </div>
-            {isBtnClicked?
-                <AddCarForm/>:
-                <BaseButton onClick={editCar} text="Edit"> </BaseButton>
+            {!isBtnClicked ?
+                <div>
+                    <img src={car.imageUrl} alt={`${car.make} ${car.model}`} />
+                    <h1>{car.make}</h1>
+                    <p>Model: {car.model}</p>
+                    <p>Year: {car.year}</p>
+                    <p>Price: {car.price}</p>
+                    <BaseButton onClick={toggleEdit} text="Edit"> </BaseButton>
+                    <BaseButton onClick={deleteCar} text="Delete"> </BaseButton>
+
+                </div> :
+                <div>
+                    <AddCarForm></AddCarForm>
+                </div>
             }
-            
-            <BaseButton onClick={deleteCar} text="Delete"> </BaseButton>
+
         </div>
     );
 };
