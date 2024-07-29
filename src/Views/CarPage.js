@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import BaseButton from '../Components/Shared/BaseButton';
 import CarCard from "../Components/CarsCard";
+
 const CarPage = () => {
     const [formData, setFormData] = useState({
         make: '',
@@ -14,13 +15,11 @@ const CarPage = () => {
     const [car, setCar] = useState(location);
 
     const [isCarDeleted, setIsCarDeleted] = useState(false);
-    //const isBtnActiveRef = useRef(0)
     const [handleError, setHandleError] = useState({
-        status:'',
-        message:''
+        status: '',
+        message: ''
     });
     const [errors, setErrors] = useState([]);
-
 
     useEffect(() => {
         if (location) {
@@ -35,7 +34,7 @@ const CarPage = () => {
                     'Content-Type': 'application/json',
                     'Accept': '*/*'
                 }
-            }).then();
+            });
             console.log(response);
         } catch (error) {
             console.log(error);
@@ -43,7 +42,6 @@ const CarPage = () => {
     }
 
     const deleteCar = () => {
-        
         new Promise((resolve, reject) => {
             axios.delete(`${process.env.REACT_APP_API_KEY}/cars/delete/${car.id}`, {
                 headers: {
@@ -51,9 +49,9 @@ const CarPage = () => {
                     'Accept': '*/*'
                 }
             }).then(response => resolve(response))
-            .catch(error => reject(error))
+                .catch(error => reject(error))
         }).then((response) => {
-            setIsCarDeleted(true)
+            setIsCarDeleted(true);
             console.log(response);
         }).catch((error) => {
             setHandleError({
@@ -61,25 +59,20 @@ const CarPage = () => {
                 status: "Error",
                 message: error?.response?.data?.message
             });
-        })
+        });
     }
 
     return (
         <div>
             <div>
-                <img src={car.imageUrl} />
+                <img src={car.imageUrl} alt={`${car.make} ${car.model}`} />
                 <h1>{car.make}</h1>
                 <p>Model: {car.model}</p>
                 <p>Year: {car.year}</p>
                 <p>Price: {car.price}</p>
             </div>
-            {/** TODO: Delete Btn-> If button is clicked button-disabled 
-             * Axios.delete
-             * then(if(success)-> redirect to all cars)
-             * catch(return error) remove disabled btn)
-            */}
-            <BaseButton onClick={editCar()} text="Edit"> </BaseButton> 
-            <BaseButton onClick={deleteCar()} text="Delete"> </BaseButton>
+            <BaseButton onClick={editCar} text="Edit"> </BaseButton>
+            <BaseButton onClick={deleteCar} text="Delete"> </BaseButton>
         </div>
     );
 };
