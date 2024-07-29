@@ -4,7 +4,7 @@ import axios from 'axios';
 import BaseButton from '../Components/Shared/BaseButton';
 import CarCard from "../Components/CarsCard";
 import AddCarForm from '../Components/Forms/AddCarForm';
-
+import '../assests/scss/carPage.scss'
 const CarPage = () => {
     const [formData, setFormData] = useState({
         make: '',
@@ -56,6 +56,7 @@ const CarPage = () => {
     }
 
     return (
+        
         <div>
             {!isBtnClicked ?
                 <div>

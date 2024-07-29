@@ -25,13 +25,6 @@ function AddCarForm({ isEditable, carData }) {
         }
     },[isEditable]) 
     let navigate = useNavigate();
-    const clearForm = () => {
-        carFormData.make = '';
-        carFormData.model = '';
-        carFormData.year = '';
-        carFormData.price = '';
-        carFormData.imageUrl = '';
-    }
 
     const [errors, setErrors] = useState({});
 
