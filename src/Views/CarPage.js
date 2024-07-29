@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import BaseButton from '../Components/Shared/BaseButton';
 import CarCard from "../Components/CarsCard";
@@ -15,6 +15,7 @@ const CarPage = () => {
     const [car, setCar] = useState(location);
 
     const [isCarDeleted, setIsCarDeleted] = useState(false);
+    let navigate = useNavigate();
     const [handleError, setHandleError] = useState({
         status: '',
         message: ''
@@ -51,6 +52,7 @@ const CarPage = () => {
             }).then(response => resolve(response))
                 .catch(error => reject(error))
         }).then((response) => {
+            navigate("/allCars")
             setIsCarDeleted(true);
             console.log(response);
         }).catch((error) => {
