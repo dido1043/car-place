@@ -78,8 +78,8 @@ const CarPage = () => {
              * then(if(success)-> redirect to all cars)
              * catch(return error) remove disabled btn)
             */}
-            {<BaseButton onClick={editCar()} text="Edit"> </BaseButton> 
-            <BaseButton onClick={deleteCar()} text="Delete"> </BaseButton>} 
+            <BaseButton onClick={editCar()} text="Edit"> </BaseButton> 
+            <BaseButton onClick={deleteCar()} text="Delete"> </BaseButton>
         </div>
     );
 };
