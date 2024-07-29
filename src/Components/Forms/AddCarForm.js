@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {useNavigate } from 'react-router-dom';
 import Label from "../Shared/Label";
 import InputField from "../Shared/InputField";
 import axios from "axios";
@@ -23,6 +24,7 @@ function AddCarForm({ isEditable, carData }) {
             })
         }
     },[isEditable]) 
+    let navigate = useNavigate();
     const clearForm = () => {
         carFormData.make = '';
         carFormData.model = '';
@@ -64,7 +66,7 @@ function AddCarForm({ isEditable, carData }) {
                     'Accept': '*/*'
                 }
             });
-
+            navigate('/allCars')
             console.log(response);
         } catch (error) {
             console.log(error);
