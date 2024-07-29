@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Label from "../Shared/Label";
 import InputField from "../Shared/InputField";
 import axios from "axios";
@@ -12,6 +12,17 @@ function AddCarForm({ isEditable, carData }) {
         price: '',
         imageUrl: ''
     });
+    useEffect(() => {
+        if (isEditable) {
+            setCarData({
+                make: carData.make,
+                model: carData.model,
+                year: carData.year,
+                price: carData.price,
+                imageUrl: carData.imageUrl,
+            })
+        }
+    },[isEditable]) 
     const clearForm = () => {
         carFormData.make = '';
         carFormData.model = '';
@@ -19,6 +30,7 @@ function AddCarForm({ isEditable, carData }) {
         carFormData.price = '';
         carFormData.imageUrl = '';
     }
+
     const [errors, setErrors] = useState({});
 
     const handleChange = (e) => {
@@ -42,6 +54,22 @@ function AddCarForm({ isEditable, carData }) {
         return errors;
 
     }
+    const editCar = async (e) => {
+        e.preventDefault()
+        try {
+            const response = await axios.put(`${process.env.REACT_APP_API_KEY}/cars/edit/${carData.id}`, carFormData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*'
+                }
+            });
+
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     //Submit method -> 1.Reset errors 2.submit form with "PreventDefault" 3.Check for errors 
     const handleSubmit = (e) => {
         setErrors([])
@@ -77,7 +105,7 @@ function AddCarForm({ isEditable, carData }) {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(isEditable? editCar : handleSubmit)}>
 
                 <Label text="Brand" />
                 <InputField value={carFormData.make} name="make"
@@ -94,8 +122,11 @@ function AddCarForm({ isEditable, carData }) {
                 <Label text="Image URL" />
                 <InputField value={carFormData.imageUrl} name="imageUrl"
                     onChange={handleChange} placeholder="ImageUrl" type="text" error={errors.imageUrl} />
+                {isEditable ?
+                    <BaseButton text="Edit" type="submit" /> :
+                    <BaseButton text="Submit" type="submit" />
+                }
 
-                <BaseButton text="Submit" type="submit" />
             </form>
         </div>
 

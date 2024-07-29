@@ -29,22 +29,7 @@ const CarPage = () => {
         }
     }, [location]);
 
-    const editCar = async () => {
-
-        try {
-            const response = await axios.put(`${process.env.REACT_APP_API_KEY}/cars/edit/${car.id}`, formData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': '*/*'
-                }
-            });
-            setIsBtnClicked(true)
-            console.log(response);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
+    
     const deleteCar = () => {
         new Promise((resolve, reject) => {
             axios.delete(`${process.env.REACT_APP_API_KEY}/cars/delete/${car.id}`, {
