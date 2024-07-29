@@ -3,8 +3,8 @@ import Label from "../Shared/Label";
 import InputField from "../Shared/InputField";
 import axios from "axios";
 import BaseButton from "../Shared/BaseButton";
-import { toast } from "react-toastify";
-function AddCarForm() {
+
+function AddCarForm({ isEditable, carData }) {
     const [carFormData, setCarData] = useState({
         make: '',
         model: '',
@@ -63,7 +63,7 @@ function AddCarForm() {
                     imageUrl: ''
                 })
                 console.log(response);
-                
+
 
             } catch (error) {
                 console.log(error);
@@ -71,7 +71,7 @@ function AddCarForm() {
         } else {
             setErrors(carFormErrors)
         }
-        
+
     }
 
 

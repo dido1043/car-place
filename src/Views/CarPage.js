@@ -84,7 +84,7 @@ const CarPage = () => {
 
                 </div> :
                 <div>
-                    <AddCarForm></AddCarForm>
+                    <AddCarForm isEditable={isBtnClicked} carData={car}></AddCarForm>
                 </div>
             }
 
