@@ -104,14 +104,10 @@ function RegisterForm() {
                         <div className="flex justify-center items-center mt-2">                            
                             <BaseButton text="Submit" type="submit" />
                         </div>
-
-
                     </form>
                 </div>
-
-            </div >
-        </div >
-
+            </div>
+        </div>
     )
 }
 

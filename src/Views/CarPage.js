@@ -13,9 +13,14 @@ const CarPage = () => {
     const location = useLocation().state;
     const [car, setCar] = useState(location);
 
-
-    const isBtnActiveRef = useRef(0)
+    const [isCarDeleted, setIsCarDeleted] = useState(false);
+    //const isBtnActiveRef = useRef(0)
+    const [handleError, setHandleError] = useState({
+        status:'',
+        message:''
+    });
     const [errors, setErrors] = useState([]);
+
 
     useEffect(() => {
         if (location) {
@@ -25,7 +30,7 @@ const CarPage = () => {
 
     const editCar = async () => {
         try {
-            const response = await axios.put(`${process.env.REACT_APP_API_KEY}/cars/${car.id}`, formData, {
+            const response = await axios.put(`${process.env.REACT_APP_API_KEY}/cars/edit/${car.id}`, formData, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': '*/*'
@@ -38,18 +43,25 @@ const CarPage = () => {
     }
 
     const deleteCar = () => {
-
-        try {
-            const response = axios.delete(`${process.env.REACT_APP_API_KEY}/cars/delete/${car.id}`, {
+        
+        new Promise((resolve, reject) => {
+            axios.delete(`${process.env.REACT_APP_API_KEY}/cars/delete/${car.id}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': '*/*'
                 }
-            });
+            }).then(response => resolve(response))
+            .catch(error => reject(error))
+        }).then((response) => {
+            setIsCarDeleted(true)
             console.log(response);
-        } catch (error) {
-            console.log(error);
-        }
+        }).catch((error) => {
+            setHandleError({
+                icon: "fi fi-rr-warning",
+                status: "Error",
+                message: error?.response?.data?.message
+            });
+        })
     }
 
     return (
@@ -66,8 +78,8 @@ const CarPage = () => {
              * then(if(success)-> redirect to all cars)
              * catch(return error) remove disabled btn)
             */}
-            <BaseButton onClick={editCar()} text="Edit"> </BaseButton> 
-            <BaseButton onClick={deleteCar()} text="Delete"> </BaseButton> 
+            {<BaseButton onClick={editCar()} text="Edit"> </BaseButton> 
+            <BaseButton onClick={deleteCar()} text="Delete"> </BaseButton>} 
         </div>
     );
 };
