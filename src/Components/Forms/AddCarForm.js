@@ -56,8 +56,9 @@ function AddCarForm({ isEditable, carData }) {
     }
     const editCar = async (e) => {
         e.preventDefault()
+        const params = new URLSearchParams(carFormData).toString()
         try {
-            const response = await axios.put(`${process.env.REACT_APP_API_KEY}/cars/edit/${carData.id}`, carFormData, {
+            const response = await axios.put(`${process.env.REACT_APP_API_KEY}/cars/edit/${carData.id}?${params}`, null, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': '*/*'
