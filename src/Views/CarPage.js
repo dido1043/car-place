@@ -59,7 +59,7 @@ const CarPage = () => {
         
         <div>
             {!isBtnClicked ?
-                <div className='container'>
+                <div className='container-page'>
                     <img src={car.imageUrl} alt={`${car.make} ${car.model}`} className='car-img'/>
                     <h1>{car.make}</h1>
                     <ul>
