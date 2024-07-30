@@ -14,14 +14,6 @@ function CarCard({ car }) {
 
                         <h4>{car.make}</h4>
                         <p>{car.model}</p>
-                        <div className="car-bottom-details">
-                            <div className="car-price">Price:{car.price}$</div>
-                            <div className="car-price">Year:{car.year}</div>
-                            <div className="car-links">
-                                <i className="fi fi-rr-user"></i>
-                                
-                            </div>
-                        </div>
 
                     </div>
                 </div>
