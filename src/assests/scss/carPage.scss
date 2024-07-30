@@ -1,13 +1,31 @@
 @import "./variables.scss";
-img{}
-div{
-    
-	
 
-    h1{
-
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    .car-img {
+        margin-top: 20px;
+        width: 50vw;
+        border-radius: 20px;
     }
-    p{
-
+    h1{
+        font-size: 50px;
+        font-weight: bold;   
+    }
+    h1:hover{
+        color: $blue;
+    }
+    ul{
+       font-size: x-large;
+       li:first-child{
+        font-weight: bold;
+        
+       }
+       li:first-child:hover{
+        color: $blue;
+        
+       }
     }
 }
