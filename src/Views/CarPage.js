@@ -59,12 +59,15 @@ const CarPage = () => {
         
         <div>
             {!isBtnClicked ?
-                <div>
-                    <img src={car.imageUrl} alt={`${car.make} ${car.model}`} />
+                <div className='container'>
+                    <img src={car.imageUrl} alt={`${car.make} ${car.model}`} className='car-img'/>
                     <h1>{car.make}</h1>
-                    <p>Model: {car.model}</p>
-                    <p>Year: {car.year}</p>
-                    <p>Price: {car.price}</p>
+                    <ul>
+                        <li>Model: {car.model}</li>
+                        <li>Year: {car.year}</li>
+                        <li>Price: {car.price}$</li>
+
+                    </ul>
                     <BaseButton onClick={toggleEdit} text="Edit"> </BaseButton>
                     <BaseButton onClick={deleteCar} text="Delete"> </BaseButton>
 
