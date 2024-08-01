@@ -10,6 +10,7 @@ import AllCars from './Views/AllCars';
 import Register from "./Views/Register"
 import CarPage from "./Views/CarPage"
 import AddCar from './Views/AddCar';
+import NotFoundPage from './Views/NotFoundPage';
 
 // -----
 
@@ -19,11 +20,14 @@ function App() {
       <div>
         <Header />
         <Routes>
+          <Route path='/'/>
           <Route path="/cars" element={<Cars />} />
           <Route path="/cars/add" element={<AddCar />} />
           <Route path="/allCars" element={<AllCars />} />
           <Route path="/register" element={<Register />} />
           <Route path="/allCars/cars/:id" element={<CarPage />} />
+        
+          <Route path='*' element={<NotFoundPage/>}/>
         </Routes>
       </div>
     </Router>

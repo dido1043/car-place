@@ -38,7 +38,10 @@ const CarPage = () => {
                     'Accept': '*/*'
                 }
             }).then(response => resolve(response))
-                .catch(error => reject(error))
+                .catch(error => {
+                    reject(error)
+                    
+                })
         }).then((response) => {
             navigate("/allCars")
             console.log(response);
