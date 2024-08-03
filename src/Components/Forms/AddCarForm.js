@@ -11,7 +11,9 @@ function AddCarForm({ isEditable, carData }) {
         model: '',
         year: '',
         price: '',
-        imageUrl: ''
+        imageUrl: '',
+        hp:'',
+        description:''
     });
     useEffect(() => {
         if (isEditable) {
@@ -21,6 +23,8 @@ function AddCarForm({ isEditable, carData }) {
                 year: carData.year,
                 price: carData.price,
                 imageUrl: carData.imageUrl,
+                hp:carData.hp,
+                description:carData.description
             })
         }
     },[isEditable]) 
@@ -46,6 +50,8 @@ function AddCarForm({ isEditable, carData }) {
         if (!carFormData.price) errors.price = "Invalid car price!"
         if (!carFormData.year) errors.year = "Invalid year of creation!"
         if (!carFormData.imageUrl) errors.imageUrl = "Invalid image url!"
+        if (!carFormData.hp) errors.hp = "Invalid car hp!"
+        if (!carFormData.description) errors.description = "Invalid description!" 
         return errors;
 
     }
@@ -84,7 +90,9 @@ function AddCarForm({ isEditable, carData }) {
                     model: '',
                     year: '',
                     price: '',
-                    imageUrl: ''
+                    imageUrl: '',
+                    hp:'',
+                    description:''
                 })
                 console.log(response);
 
@@ -118,9 +126,15 @@ function AddCarForm({ isEditable, carData }) {
                 <Label text="Image URL" />
                 <InputField value={carFormData.imageUrl} name="imageUrl"
                     onChange={handleChange} placeholder="ImageUrl" type="text" error={errors.imageUrl} />
+                    <Label text="HP" />
+                <InputField value={carFormData.hp} name="hp"
+                    onChange={handleChange} placeholder="HP" type="text" error={errors.hp} />
+                <Label text="Description" />
+                <InputField value={carFormData.description} name="description"
+                    onChange={handleChange} placeholder="Description" type="text" error={errors.description} />
                 {isEditable ?
                     <BaseButton text="Edit" type="submit" /> :
-                    <BaseButton text="Submit" type="submit" />
+                    <BaseButton text="Add" type="submit" />
                 }
 
             </form>

@@ -10,7 +10,10 @@ const CarPage = () => {
         make: '',
         model: '',
         price: '',
-        year: ''
+        year: '',
+        imageUrl:'',
+        hp:'',
+        description:''
     });
     const location = useLocation().state;
     const [car, setCar] = useState(location);
@@ -69,8 +72,9 @@ const CarPage = () => {
                         <li>Model: {car.model}</li>
                         <li>Year: {car.year}</li>
                         <li>Price: {car.price}$</li>
-
+                        <li>Horse Powers: {car.hp}</li>
                     </ul>
+                    <div className='description-box'>{car.description}</div>
                     <BaseButton onClick={toggleEdit} text="Edit"> </BaseButton>
                     <BaseButton onClick={deleteCar} text="Delete"> </BaseButton>
 
