@@ -11,6 +11,7 @@ import Register from "./Views/Register"
 import CarPage from "./Views/CarPage"
 import AddCar from './Views/AddCar';
 import NotFoundPage from './Views/NotFoundPage';
+import Login from './Views/Login';
 
 // -----
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/cars/add" element={<AddCar />} />
           <Route path="/allCars" element={<AllCars />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/allCars/cars/:id" element={<CarPage />} />
         
           <Route path='*' element={<NotFoundPage/>}/>
