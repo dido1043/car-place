@@ -23,6 +23,10 @@ function Header() {
             path: "/register",
             name: "Register"
         },
+        {
+            path:'/login',
+            name:'Login'
+        }
     ]
 
     return (
