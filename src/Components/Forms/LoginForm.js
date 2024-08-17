@@ -13,7 +13,9 @@ function LoginForm() {
         email: '',
         password: ''
     });
-    const [error, setError] = useState(null);
+    const [error, setError] = useState({
+        message:''
+    });
     const navigate = useNavigate();
 
     const handleChange = async (e) => {
@@ -23,9 +25,16 @@ function LoginForm() {
             [name]: value
         })
     }
+    const validateForm = () => {
+        const errors = {};
+        if (!formData.email) errors.email = 'Email is required';
+        if (!formData.password) errors.password = 'Password is required';
+        return errors;
+    };
     const handleLogin = async (e) => {
+        setError([])
         e.preventDefault();
-        setError(null);
+        const formErrors = validateForm();
         try {
             const response = await axios.post(`${process.env.REACT_APP_API_KEY}/login`, formData);
             if (response.status === 200) {
