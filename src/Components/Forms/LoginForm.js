@@ -40,11 +40,15 @@ function LoginForm() {
             if (response.status === 200) {
                 // Assuming the API returns a token and/or user data
                 localStorage.setItem('token', response.data.token);
+               
+                
                 // Redirect to another page after login
                 navigate('/cars');
             } else {
                 setError('Login failed. Please try again.');
             }
+            
+            console.log(response.data.token);
         } catch (err) {
             if (err.response && err.response.data) {
                 setError(err.response.data.message || 'Login failed. Please try again.');
