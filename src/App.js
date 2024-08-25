@@ -26,20 +26,21 @@ function App() {
       <Routes>
         {token ? (
           <>
-            <Route path="/" element={<div>Home</div>} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </>
+          <Route path="/" element={<div>Home</div>} />
+          <Route path="/cars" element={<Cars />} />
+          <Route path="/cars/add" element={<AddCar />} />
+          <Route path="/allCars" element={<AllCars />} />
+          <Route path="/allCars/cars/:id" element={<CarPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </>
         ) : (
           <>
-            <Route path="/" element={<div>Home</div>} />
-            <Route path="/cars" element={<Cars />} />
-            <Route path="/cars/add" element={<AddCar />} />
-            <Route path="/allCars" element={<AllCars />} />
-            <Route path="/allCars/cars/:id" element={<CarPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </>
+          <Route path="/" element={<div>Home</div>} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </>
+
         )}
       </Routes>
     </div>
