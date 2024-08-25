@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import "../../assests/scss/header.scss";
 import logoRight from '../../assests/images/logo.webp';
@@ -7,18 +7,6 @@ import logoLeft from '../../assests/images/logo2.webp';
 function Header() {
     const [token, setToken] = useState(() => localStorage.getItem("token"))
 
-    useEffect(() => {
-        const handleStorageChange = () => {
-            setToken(localStorage.getItem("token"));
-            renderMenu()
-        };
-
-        window.addEventListener('storage', handleStorageChange);
-
-        return () => {
-            window.removeEventListener('storage', handleStorageChange);
-        };
-    }, [])
 
     const LogoutFn = () => {
         localStorage.removeItem("token");

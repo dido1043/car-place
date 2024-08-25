@@ -14,7 +14,7 @@ function LoginForm() {
         password: ''
     });
     const [error, setError] = useState({
-        message:''
+        message: ''
     });
     const navigate = useNavigate();
 
@@ -40,14 +40,15 @@ function LoginForm() {
             if (response.status === 200) {
                 // Assuming the API returns a token and/or user data
                 localStorage.setItem('token', `Bearer ${response.data.accessToken}`);
-               
-                
+
+
                 // Redirect to another page after login
-                navigate('/cars');
+                navigate('/cars')
+                window.location.reload();
             } else {
                 setError('Login failed. Please try again.');
             }
-            
+
             console.log(response.data.accessToken);
         } catch (err) {
             if (err.response && err.response.data) {
