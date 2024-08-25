@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom'
-import "../../assests/scss/header.scss"
+import { Link } from 'react-router-dom';
+import "../../assests/scss/header.scss";
 import logoRight from '../../assests/images/logo.webp';
 import logoLeft from '../../assests/images/logo2.webp';
 
 function Header() {
-    const [token, setToken] = useState(localStorage.getItem("token"));
+    const [token, setToken] = useState(() => localStorage.getItem("token"))
 
     useEffect(() => {
         const handleStorageChange = () => {
             setToken(localStorage.getItem("token"));
+            renderMenu()
         };
 
         window.addEventListener('storage', handleStorageChange);
@@ -17,12 +18,14 @@ function Header() {
         return () => {
             window.removeEventListener('storage', handleStorageChange);
         };
-    }, []);
+    }, [])
 
     const LogoutFn = () => {
         localStorage.removeItem("token");
         setToken(null);
+        renderMenu()
     };
+
     const deafaultMenu = [
         {
             path: "/register",
@@ -33,6 +36,7 @@ function Header() {
             name: 'Login'
         }
     ]
+
     const mainMenu = [
         {
             path: "/cars",
@@ -53,27 +57,24 @@ function Header() {
         }
     ]
 
+    const renderMenu = () => {
+        const menu = token ? mainMenu : deafaultMenu;
+        return menu.map(item => (
+            <li key={item.path}>
+                <Link to={item.path} className="menu-item" onClick={item.fn ? item.fn : null}>
+                    {item.name}
+                </Link>
+            </li>
+        ))
+    }
+
     return (
         <nav className="menu">
             <img src={logoLeft} alt="Logo" className="logo-left" />
             <img src={logoRight} alt="Logo" className="logo-right" />
-
-            {token ? deafaultMenu.map(item => (
-                <li key={item.path}>
-                    <Link to={item.path} className="menu-item">
-                        {item.name}
-                    </Link>
-                </li>
-            )) :
-                mainMenu.map(item => (
-                    <li key={item.path}>
-
-                        <Link to={item.path} className="menu-item" onClick={item.fn ? item.fn() : ''} >
-                            {item.name}
-                        </Link>
-                    </li>
-                ))}
+            {renderMenu()}
         </nav>
     )
 }
+
 export default Header;
