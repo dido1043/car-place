@@ -13,9 +13,9 @@ import AddCar from './Views/AddCar';
 import NotFoundPage from './Views/NotFoundPage';
 import Login from './Views/Login';
 
-// -----
 
 function App() {
+  const token = localStorage.getItem("token");
   return (
     <Router>
       <div>

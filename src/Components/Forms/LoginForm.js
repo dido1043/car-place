@@ -39,7 +39,7 @@ function LoginForm() {
             const response = await axios.post(`${process.env.REACT_APP_API_KEY}/login`, formData);
             if (response.status === 200) {
                 // Assuming the API returns a token and/or user data
-                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('token', `Bearer ${response.data.accessToken}`);
                
                 
                 // Redirect to another page after login
@@ -48,7 +48,7 @@ function LoginForm() {
                 setError('Login failed. Please try again.');
             }
             
-            console.log(response.data.token);
+            console.log(response.data.accessToken);
         } catch (err) {
             if (err.response && err.response.data) {
                 setError(err.response.data.message || 'Login failed. Please try again.');

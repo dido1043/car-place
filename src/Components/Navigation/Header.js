@@ -5,37 +5,55 @@ import logoRight from '../../assests/images/logo.webp';
 import logoLeft from '../../assests/images/logo2.webp';
 
 function Header() {
-
-    const menuItems = [
+    const token = localStorage.getItem("token");
+    const deafaultMenu = [
+        {
+            path: "/register",
+            name: "Register"
+        },
+        {
+            path: '/login',
+            name: 'Login'
+        }
+    ]
+    const mainMenu = [
         {
             path: "/cars",
             name: "Cars"
         },
         {
-            path:"/cars/add",
-            name:"Add"
+            path: "/cars/add",
+            name: "Add"
         },
         {
             path: "/allCars",
             name: "All"
         },
         {
-            path: "/register",
-            name: "Register"
-        },
-        {
-            path:'/login',
-            name:'Login'
+            path: "/login",
+            name: "Logout",
+            fn:"LogoutFn"
         }
     ]
-
+    const LogoutFn = () =>{
+       localStorage.removeItem("token");
+    };
     return (
         <nav className="menu">
             <img src={logoLeft} alt="Logo" className="logo-left" />
             <img src={logoRight} alt="Logo" className="logo-right" />
-            {menuItems.map(item => (
+
+            {token ? deafaultMenu.map(item =>(
+                 <li key={item.path}>
+                 <Link to={item.path} className="menu-item">
+                     {item.name}
+                 </Link>
+             </li>
+            )) : 
+            mainMenu.map(item => (
                 <li key={item.path}>
-                    <Link to={item.path} className="menu-item">
+                
+                    <Link to={item.path} className="menu-item" onClick={LogoutFn}>
                         {item.name}
                     </Link>
                 </li>
