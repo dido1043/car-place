@@ -1,5 +1,6 @@
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 import Header from './Components/Navigation/Header';
 
@@ -15,24 +16,36 @@ import Login from './Views/Login';
 
 
 function App() {
-  const token = localStorage.getItem("token");
+  const [token, setToken] = useState(localStorage.getItem('token'));
+  const location = useLocation();
+
+  useEffect(() => {
+    setToken(localStorage.getItem('token'));
+  }, [location]);
+
   return (
-    <Router>
-      <div>
-        <Header />
-        <Routes>
-          <Route path='/'/>
-          <Route path="/cars" element={<Cars />} />
-          <Route path="/cars/add" element={<AddCar />} />
-          <Route path="/allCars" element={<AllCars />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/allCars/cars/:id" element={<CarPage />} />
-        
-          <Route path='*' element={<NotFoundPage/>}/>
-        </Routes>
-      </div>
-    </Router>
+    <div>
+      <Header />
+      <Routes>
+        {token ? (
+          <>
+            <Route path="/" element={<div>Home</div>} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </>
+        ) : (
+          <>
+            <Route path="/" element={<div>Home</div>} />
+            <Route path="/cars" element={<Cars />} />
+            <Route path="/cars/add" element={<AddCar />} />
+            <Route path="/allCars" element={<AllCars />} />
+            <Route path="/allCars/cars/:id" element={<CarPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </>
+        )}
+      </Routes>
+    </div>
   );
 }
 
