@@ -1,19 +1,16 @@
-
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 import Header from './Components/Navigation/Header';
 
-
 // Views
-import Cars from './Views/Cars'
+import Cars from './Views/Cars';
 import AllCars from './Views/AllCars';
-import Register from "./Views/Register"
-import CarPage from "./Views/CarPage"
+import Register from './Views/Register';
+import CarPage from './Views/CarPage';
 import AddCar from './Views/AddCar';
 import NotFoundPage from './Views/NotFoundPage';
 import Login from './Views/Login';
-
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -49,4 +46,10 @@ function App() {
   );
 }
 
-export default App;
+export default function AppWrapper() {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+}
