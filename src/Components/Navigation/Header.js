@@ -32,32 +32,32 @@ function Header() {
         {
             path: "/login",
             name: "Logout",
-            fn:"LogoutFn"
+            fn: "LogoutFn"
         }
     ]
-    const LogoutFn = () =>{
-       localStorage.removeItem("token");
+    const LogoutFn = () => {
+        localStorage.removeItem("token");
     };
     return (
         <nav className="menu">
             <img src={logoLeft} alt="Logo" className="logo-left" />
             <img src={logoRight} alt="Logo" className="logo-right" />
 
-            {token ? deafaultMenu.map(item =>(
-                 <li key={item.path}>
-                 <Link to={item.path} className="menu-item">
-                     {item.name}
-                 </Link>
-             </li>
-            )) : 
-            mainMenu.map(item => (
+            {token ? deafaultMenu.map(item => (
                 <li key={item.path}>
-                
-                    <Link to={item.path} className="menu-item" onClick={LogoutFn}>
+                    <Link to={item.path} className="menu-item">
                         {item.name}
                     </Link>
                 </li>
-            ))}
+            )) :
+                mainMenu.map(item => (
+                    <li key={item.path}>
+
+                        <Link to={item.path} className="menu-item" onClick={item.fn ? item.fn() : ''} >
+                            {item.name}
+                        </Link>
+                    </li>
+                ))}
         </nav>
     )
 }
