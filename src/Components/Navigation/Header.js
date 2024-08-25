@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
 import "../../assests/scss/header.scss"
 import logoRight from '../../assests/images/logo.webp';
 import logoLeft from '../../assests/images/logo2.webp';
 
 function Header() {
-    const token = localStorage.getItem("token");
+    const [token, setToken] = useState(localStorage.getItem("token"));
+
+    useEffect(() => {
+        const handleStorageChange = () => {
+            setToken(localStorage.getItem("token"));
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
+    }, []);
+
     const LogoutFn = () => {
-        //console.log(token);
-        
         localStorage.removeItem("token");
+        setToken(null);
     };
     const deafaultMenu = [
         {
