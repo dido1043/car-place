@@ -6,6 +6,11 @@ import logoLeft from '../../assests/images/logo2.webp';
 
 function Header() {
     const token = localStorage.getItem("token");
+    const LogoutFn = () => {
+        //console.log(token);
+        
+        localStorage.removeItem("token");
+    };
     const deafaultMenu = [
         {
             path: "/register",
@@ -32,12 +37,10 @@ function Header() {
         {
             path: "/login",
             name: "Logout",
-            fn: "LogoutFn"
+            fn: LogoutFn
         }
     ]
-    const LogoutFn = () => {
-        localStorage.removeItem("token");
-    };
+
     return (
         <nav className="menu">
             <img src={logoLeft} alt="Logo" className="logo-left" />
