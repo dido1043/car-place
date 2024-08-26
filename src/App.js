@@ -11,7 +11,7 @@ import CarPage from './Views/CarPage';
 import AddCar from './Views/AddCar';
 import NotFoundPage from './Views/NotFoundPage';
 import Login from './Views/Login';
-
+import Home from './Views/Home';
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const location = useLocation();
@@ -26,7 +26,7 @@ function App() {
       <Routes>
         {token ? (
           <>
-          <Route path="/" element={<div>Home</div>} />
+          <Route path="/" element={<Home />} />
           <Route path="/cars" element={<Cars />} />
           <Route path="/cars/add" element={<AddCar />} />
           <Route path="/allCars" element={<AllCars />} />
@@ -35,7 +35,7 @@ function App() {
         </>
         ) : (
           <>
-          <Route path="/" element={<div>Home</div>} />
+          <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFoundPage />} />
