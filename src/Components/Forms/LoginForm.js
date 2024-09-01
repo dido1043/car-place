@@ -31,7 +31,7 @@ function LoginForm() {
         if (!formData.password) errors.password = 'Password is required';
         return errors;
     };
-    const getUserRole = async (email) => {
+    const getUserRole = async (email, accessToken) => {
         try {
             const params = {
                 email: email
@@ -46,8 +46,10 @@ function LoginForm() {
                 }
             });
 
-            localStorage.setItem('role', response.data)
-            console.log(response.data);
+            localStorage.setItem('token', `Bearer ${accessToken}`);
+            localStorage.setItem('role', response.data);
+
+            navigate('/allCars');
         } catch (error) {
             console.error('Error data:', error);
         }
@@ -59,17 +61,7 @@ function LoginForm() {
         try {
             const response = await axios.post(`${process.env.REACT_APP_API_KEY}/login`, formData);
             if (response.status === 200) {
-                // Assuming the API returns a token and/or user data
-                localStorage.setItem('token', `Bearer ${response.data.accessToken}`);
-                console.log(response.data);
-                //console.log(formData.email);
-
-                getUserRole(formData.email);
-                //console.log(response.data.role);
-                
-                // Redirect to another page after login
-                navigate('/allCars')
-                // window.location.reload();
+                getUserRole(formData.email, response.data.accessToken);
             } else {
                 setError('Login failed. Please try again.');
             }
