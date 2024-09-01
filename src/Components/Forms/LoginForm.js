@@ -67,7 +67,7 @@ function LoginForm() {
                 //console.log(response.data.role);
 
                 // Redirect to another page after login
-                //navigate('/allCars')
+                navigate('/allCars')
                 // window.location.reload();
             } else {
                 setError('Login failed. Please try again.');
