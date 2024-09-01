@@ -31,6 +31,24 @@ function LoginForm() {
         if (!formData.password) errors.password = 'Password is required';
         return errors;
     };
+    const getUserRole = async (email) => {
+        try {
+            console.log(email);
+            await axios.get(`${process.env.REACT_APP_API_KEY}/me`,{"email": email}, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*'
+                }
+            }).then((response) => {
+                console.log(response);
+
+                
+            });
+
+        } catch (error) {
+
+        }
+    }
     const handleLogin = async (e) => {
         setError([])
         e.preventDefault();
@@ -40,11 +58,15 @@ function LoginForm() {
             if (response.status === 200) {
                 // Assuming the API returns a token and/or user data
                 localStorage.setItem('token', `Bearer ${response.data.accessToken}`);
-
+                console.log(response.data);
+                //console.log(formData.email);
+                
+                getUserRole(formData.email);
+                //console.log(response.data.role);
 
                 // Redirect to another page after login
-                navigate('/cars')
-                window.location.reload();
+                //navigate('/allCars')
+                // window.location.reload();
             } else {
                 setError('Login failed. Please try again.');
             }

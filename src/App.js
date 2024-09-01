@@ -4,7 +4,7 @@ import './App.css';
 import Header from './Components/Navigation/Header';
 
 // Views
-import Cars from './Views/Cars';
+
 import AllCars from './Views/AllCars';
 import Register from './Views/Register';
 import CarPage from './Views/CarPage';
@@ -27,7 +27,6 @@ function App() {
         {token ? (
           <>
           <Route path="/" element={<Home />} />
-          <Route path="/cars" element={<Cars />} />
           <Route path="/cars/add" element={<AddCar />} />
           <Route path="/allCars" element={<AllCars />} />
           <Route path="/allCars/cars/:id" element={<CarPage />} />

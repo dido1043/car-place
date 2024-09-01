@@ -27,10 +27,6 @@ function Header() {
 
     const mainMenu = [
         {
-            path: "/cars",
-            name: "Cars"
-        },
-        {
             path: "/cars/add",
             name: "Add"
         },
