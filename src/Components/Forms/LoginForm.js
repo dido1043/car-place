@@ -33,20 +33,22 @@ function LoginForm() {
     };
     const getUserRole = async (email) => {
         try {
-            console.log(email);
-            await axios.get(`${process.env.REACT_APP_API_KEY}/me`,{"email": email}, {
+            const params = {
+                email: email
+            };
+            console.log(params);
+
+            const response = await axios.get(`${process.env.REACT_APP_API_KEY}/me`, {
+                params: params,
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': '*/*'
                 }
-            }).then((response) => {
-                console.log(response);
-
-                
             });
 
+            console.log(response);
         } catch (error) {
-
+            console.error('Error data:', error);
         }
     }
     const handleLogin = async (e) => {
@@ -60,7 +62,7 @@ function LoginForm() {
                 localStorage.setItem('token', `Bearer ${response.data.accessToken}`);
                 console.log(response.data);
                 //console.log(formData.email);
-                
+
                 getUserRole(formData.email);
                 //console.log(response.data.role);
 
