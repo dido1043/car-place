@@ -46,7 +46,8 @@ function LoginForm() {
                 }
             });
 
-            console.log(response);
+            localStorage.setItem('role', response.data)
+            console.log(response.data);
         } catch (error) {
             console.error('Error data:', error);
         }
@@ -65,7 +66,7 @@ function LoginForm() {
 
                 getUserRole(formData.email);
                 //console.log(response.data.role);
-
+                
                 // Redirect to another page after login
                 navigate('/allCars')
                 // window.location.reload();
