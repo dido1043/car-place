@@ -26,7 +26,6 @@ function App() {
       <Routes>
         {token ? (
           <>
-          <Route path="/" element={<Home />} />
           <Route path="/cars/add" element={<AddCar />} />
           <Route path="/allCars" element={<AllCars />} />
           <Route path="/allCars/cars/:id" element={<CarPage />} />

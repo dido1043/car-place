@@ -7,13 +7,20 @@ import logoLeft from '../../assests/images/logo2.webp';
 function Header() {
     const [token, setToken] = useState(() => localStorage.getItem("token"))
 
-
+    console.log(token);
+    
     const LogoutFn = () => {
+        localStorage.removeItem("role");
         localStorage.removeItem("token");
         setToken(null);
         renderMenu()
     };
-
+    
+    window.addEventListener('load', ()=>{
+        localStorage.removeItem("role");
+        localStorage.removeItem("token");
+        setToken(null);
+    });
     const deafaultMenu = [
         {
             path: "/register",
@@ -42,7 +49,7 @@ function Header() {
     ]
 
     const renderMenu = () => {
-        const menu = token ? mainMenu : deafaultMenu;
+        const menu = token != null ? mainMenu : deafaultMenu;
         return menu.map(item => (
             <li key={item.path}>
                 <Link to={item.path} className="menu-item" onClick={item.fn ? item.fn : null}>

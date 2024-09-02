@@ -31,7 +31,7 @@ function LoginForm() {
         if (!formData.password) errors.password = 'Password is required';
         return errors;
     };
-    const getUserRole = async (email, accessToken) => {
+    const getUserRole = async (email) => {
         try {
             const params = {
                 email: email
@@ -45,8 +45,9 @@ function LoginForm() {
                     'Accept': '*/*'
                 }
             });
-
-            localStorage.setItem('token', `Bearer ${accessToken}`);
+            //console.log(response.data);
+            
+            
             localStorage.setItem('role', response.data);
 
             navigate('/allCars');
@@ -61,12 +62,16 @@ function LoginForm() {
         try {
             const response = await axios.post(`${process.env.REACT_APP_API_KEY}/login`, formData);
             if (response.status === 200) {
-                getUserRole(formData.email, response.data.accessToken);
+                localStorage.setItem('token', `Bearer ${response.data.accessToken}`);
+                //console.log("Session ->"+session);
+                
+                getUserRole(formData.email);
+                //window.location.reload(true);
             } else {
                 setError('Login failed. Please try again.');
             }
-
-            console.log(response.data.accessToken);
+            
+            //console.log(response.data.accessToken);
         } catch (err) {
             if (err.response && err.response.data) {
                 setError(err.response.data.message || 'Login failed. Please try again.');
