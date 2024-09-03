@@ -20,8 +20,10 @@ function App() {
   let navigate = useNavigate();
 
 
+
   useEffect(() => {
     const checkExpirationTime = () => {
+      console.log(new Date().getTime() > parseInt(expirationTime, 10));
       const expirationTime = localStorage.getItem('expirationTime');
       if (new Date().getTime() > parseInt(expirationTime, 10)) {
         localStorage.clear();
@@ -29,11 +31,9 @@ function App() {
       }
     };
 
-    const interval = setInterval(checkExpirationTime, 60000);
+    setInterval(checkExpirationTime, 60000);
 
-    return () => {
-      clearInterval(interval);
-    };
+
   }, []);
 
 

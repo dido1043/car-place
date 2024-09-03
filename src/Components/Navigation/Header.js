@@ -15,12 +15,6 @@ function Header() {
         setToken(null);
         renderMenu()
     };
-    
-    window.addEventListener('load', ()=>{
-        localStorage.removeItem("role");
-        localStorage.removeItem("token");
-        setToken(null);
-    });
     const deafaultMenu = [
         {
             path: "/register",
