@@ -12,13 +12,31 @@ import AddCar from './Views/AddCar';
 import NotFoundPage from './Views/NotFoundPage';
 import Login from './Views/Login';
 import Home from './Views/Home';
+import { useNavigate } from 'react-router-dom';
+
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const location = useLocation();
+  let navigate = useNavigate();
+
 
   useEffect(() => {
-    setToken(localStorage.getItem('token'));
-  }, [location]);
+    const checkExpirationTime = () => {
+      const expirationTime = localStorage.getItem('expirationTime');
+      if (new Date().getTime() > parseInt(expirationTime, 10)) {
+        localStorage.clear();
+        navigate('/login')
+      }
+    };
+
+    const interval = setInterval(checkExpirationTime, 60000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+
 
   return (
     <div>
@@ -26,18 +44,18 @@ function App() {
       <Routes>
         {token ? (
           <>
-          <Route path="/cars/add" element={<AddCar />} />
-          <Route path="/allCars" element={<AllCars />} />
-          <Route path="/allCars/cars/:id" element={<CarPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </>
+            <Route path="/cars/add" element={<AddCar />} />
+            <Route path="/allCars" element={<AllCars />} />
+            <Route path="/allCars/cars/:id" element={<CarPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </>
         ) : (
           <>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </>
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </>
 
         )}
       </Routes>
