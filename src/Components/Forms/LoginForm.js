@@ -51,6 +51,8 @@ function LoginForm() {
             localStorage.setItem('role', response.data);
 
             navigate('/allCars');
+            window.location.reload(true);
+
         } catch (error) {
             console.error('Error data:', error);
         }
@@ -69,7 +71,6 @@ function LoginForm() {
                 //console.log("Session ->"+session);
 
                 getUserRole(formData.email);
-                //window.location.reload(true);
             } else {
                 setError('Login failed. Please try again.');
             }
