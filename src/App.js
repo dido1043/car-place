@@ -19,25 +19,24 @@ function App() {
   const location = useLocation();
   let navigate = useNavigate();
 
-
-
-  useEffect(() => {
-    const checkExpirationTime = () => {
-      console.log(new Date().getTime() > parseInt(expirationTime, 10));
-      const expirationTime = localStorage.getItem('expirationTime');
-      if (new Date().getTime() > parseInt(expirationTime, 10)) {
-        localStorage.clear();
-        navigate('/login')
-      }
-    };
-
-    setInterval(checkExpirationTime, 60000);
-
-
-  }, []);
-
-
-
+  const checkExpirationTime = () => {
+    console.log(new Date().getTime() > parseInt(expirationTime, 10));
+    console.log(new Date().getTime() );
+    console.log(parseInt(expirationTime, 10));
+    
+    const expirationTime = localStorage.getItem('tokenExpiration')? localStorage.getItem("tokenExpiration") : null
+    if (!expirationTime) {
+      return
+    }
+  
+    if (new Date().getTime() > parseInt(expirationTime, 10)) {
+      localStorage.clear()
+      clearInterval(interval)
+      //navigate("/login")
+    }
+  };
+  
+  const interval = setInterval(checkExpirationTime, 1000)
   return (
     <div>
       <Header />
