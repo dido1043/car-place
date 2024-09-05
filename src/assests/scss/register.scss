@@ -1,7 +1,7 @@
 @import "./variables.scss";
 
 .register-form {
-  background-color: $gray;
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,7 +11,7 @@
   bottom: 0;
   right: 0;
   .box {
-    background-color: $white;
+    background-color: $gray;
     display: grid;
     place-items: center;
     padding: 48px 16px;
