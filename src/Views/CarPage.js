@@ -11,9 +11,9 @@ const CarPage = () => {
         model: '',
         price: '',
         year: '',
-        imageUrl:'',
-        hp:'',
-        description:''
+        imageUrl: '',
+        hp: '',
+        description: ''
     });
     const location = useLocation().state;
     const [car, setCar] = useState(location);
@@ -32,7 +32,8 @@ const CarPage = () => {
         }
     }, [location]);
 
-    
+    const [role, setRole] = useState(() => localStorage.getItem('role'))
+
     const deleteCar = () => {
         new Promise((resolve, reject) => {
             axios.delete(`${process.env.REACT_APP_API_KEY}/cars/delete/${car.id}`, {
@@ -43,7 +44,7 @@ const CarPage = () => {
             }).then(response => resolve(response))
                 .catch(error => {
                     reject(error)
-                    
+
                 })
         }).then((response) => {
             navigate("/allCars")
@@ -62,11 +63,11 @@ const CarPage = () => {
     }
 
     return (
-        
+
         <div>
             {!isBtnClicked ?
                 <div className='container-page'>
-                    <img src={car.imageUrl} alt={`${car.make} ${car.model}`} className='car-img'/>
+                    <img src={car.imageUrl} alt={`${car.make} ${car.model}`} className='car-img' />
                     <h1>{car.make}</h1>
                     <ul>
                         <li>Model: {car.model}</li>
@@ -75,8 +76,14 @@ const CarPage = () => {
                         <li>Horse Powers: {car.hp}</li>
                     </ul>
                     <div className='description-box'>{car.description}</div>
-                    <BaseButton onClick={toggleEdit} text="Edit"> </BaseButton>
-                    <BaseButton onClick={deleteCar} text="Delete"> </BaseButton>
+                    {role == "Admin" ?
+                        <>
+                            <BaseButton onClick={toggleEdit} text="Edit"> </BaseButton>
+                            <BaseButton onClick={deleteCar} text="Delete"> </BaseButton>
+                        </> :
+                        <></>
+                    }
+
 
                 </div> :
                 <div>
