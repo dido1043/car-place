@@ -26,7 +26,7 @@ function App() {
       return
     }
 
-    if (new Date().getTime() > parseInt(expirationTime, 10)) {
+    if (new Date().getTime() > parseInt(expirationTime, 100)) {
       localStorage.clear()
       navigate('/login')
     }
