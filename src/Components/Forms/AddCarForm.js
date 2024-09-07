@@ -96,7 +96,7 @@ function AddCarForm({ isEditable, carData }) {
                 })
                 console.log(response);
 
-
+                navigate('/allCars')
             } catch (error) {
                 console.log(error);
             }
