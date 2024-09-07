@@ -16,6 +16,8 @@ import { useNavigate } from 'react-router-dom';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
+  const [role, setRole] = useState(() => localStorage.getItem('role'));
+
   const location = useLocation();
   let navigate = useNavigate();
 
@@ -45,11 +47,22 @@ function App() {
       <Header />
       <Routes>
         {token ? (
+
           <>
-            <Route path="/cars/add" element={<AddCar />} />
-            <Route path="/allCars" element={<AllCars />} />
-            <Route path="/allCars/cars/:id" element={<CarPage />} />
-            <Route path="*" element={<NotFoundPage />} />
+            {role == "Admin" ? 
+            <>
+              <Route path="/cars/add" element={<AddCar />} />
+              <Route path="/allCars" element={<AllCars />} />
+              <Route path="/allCars/cars/:id" element={<CarPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </> :
+            <>
+              <Route path="/allCars" element={<AllCars />} />
+              <Route path="/allCars/cars/:id" element={<CarPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </>
+            }
+            
           </>
         ) : (
           <>
