@@ -6,6 +6,7 @@ import logoLeft from '../../assests/images/logo2.webp';
 
 function Header() {
     const [token, setToken] = useState(() => localStorage.getItem("token"))
+    const [role, setRole] = useState(() => localStorage.getItem("role"));
     //!!!
     console.log(token);
     
@@ -27,6 +28,18 @@ function Header() {
     ]
 
     const mainMenu = [
+      
+        {
+            path: "/allCars",
+            name: "All"
+        },
+        {
+            path: "/login",
+            name: "Logout",
+            fn: LogoutFn
+        }
+    ]
+    const adminMenu = [
         {
             path: "/cars/add",
             name: "Add"
@@ -41,9 +54,9 @@ function Header() {
             fn: LogoutFn
         }
     ]
-
     const renderMenu = () => {
-        const menu = token != null ? mainMenu : deafaultMenu;
+        const clientMenu = token != null ? mainMenu : deafaultMenu;
+        const menu = role == "Admin" ? adminMenu : clientMenu;
         return menu.map(item => (
             <li key={item.path}>
                 <Link to={item.path} className="menu-item" onClick={item.fn ? item.fn : null}>
