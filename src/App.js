@@ -49,20 +49,22 @@ function App() {
         {token ? (
 
           <>
-            {role == "Admin" ? 
-            <>
-              <Route path="/cars/add" element={<AddCar />} />
-              <Route path="/allCars" element={<AllCars />} />
-              <Route path="/allCars/cars/:id" element={<CarPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </> :
-            <>
-              <Route path="/allCars" element={<AllCars />} />
-              <Route path="/allCars/cars/:id" element={<CarPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </>
+            {role == "Admin" ?
+              <>
+                <Route path="/" element={<Home />} />
+                <Route path="/cars/add" element={<AddCar />} />
+                <Route path="/allCars" element={<AllCars />} />
+                <Route path="/allCars/cars/:id" element={<CarPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </> :
+              <>
+                <Route path="/" element={<Home />} />
+                <Route path="/allCars" element={<AllCars />} />
+                <Route path="/allCars/cars/:id" element={<CarPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </>
             }
-            
+
           </>
         ) : (
           <>
