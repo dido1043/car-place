@@ -28,9 +28,10 @@ function App() {
       return
     }
 
-    if (new Date().getTime() > parseInt(expirationTime, 100)) {
+    if (new Date().getTime() > parseInt(expirationTime, 10)) {
       localStorage.clear()
-      navigate('/login')
+      navigate('/')
+      window.location.reload(true);
     }
   };
 
