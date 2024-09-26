@@ -12,6 +12,7 @@ import AddCar from './Views/AddCar';
 import NotFoundPage from './Views/NotFoundPage';
 import Login from './Views/Login';
 import Home from './Views/Home';
+import AddReview from './Views/AddReview'; 
 import { useNavigate } from 'react-router-dom';
 
 function App() {
@@ -62,7 +63,8 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/allCars" element={<AllCars />} />
                 <Route path="/allCars/cars/:id" element={<CarPage />} />
-                <Route path="*" element={<NotFoundPage />} />
+                <Route path="/allCars/cars/reviews/add/:carId" element = {<AddReview/>}/>
+                <Route path="*" element={<NotFoundPage />} /> 
               </>
             }
 
