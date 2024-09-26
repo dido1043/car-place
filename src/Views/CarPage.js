@@ -27,6 +27,8 @@ const CarPage = () => {
     const [errors, setErrors] = useState([]);
 
     useEffect(() => {
+        const pathParts = window.location.pathname.split('/');
+        //console.log(pathParts);
         if (location) {
             setCar(location);
         }
@@ -48,7 +50,7 @@ const CarPage = () => {
                 })
         }).then((response) => {
             navigate("/allCars")
-            console.log(response);
+            //console.log(response);
         }).catch((error) => {
             setHandleError({
                 icon: "fi fi-rr-warning",
@@ -57,7 +59,22 @@ const CarPage = () => {
             });
         });
     }
+    //Reviews section 
+    const pathParts = window.location.pathname.split('/');
+    const currentCarId = pathParts[pathParts.length - 1];
 
+    const [reviews, setReviews] = useState([]);
+    const navigateToAddReview = () => {
+        navigate(`/allCars/cars/reviews/add/${car.id}`)
+    }
+    useEffect(() => {
+
+        axios.get(`${process.env.REACT_APP_API_KEY}/cars/reviews/all`).then((respData) => {
+
+            //console.log(respData.data);
+            setReviews(respData.data)
+        })
+    })
     const toggleEdit = () => {
         setIsBtnClicked(!isBtnClicked);
     }
@@ -81,9 +98,27 @@ const CarPage = () => {
                             <BaseButton onClick={toggleEdit} text="Edit"> </BaseButton>
                             <BaseButton onClick={deleteCar} text="Delete"> </BaseButton>
                         </> :
-                        <></>
+                        <>
+                            <BaseButton onClick={navigateToAddReview} text="Add review"></BaseButton>
+                        </>
                     }
 
+                    <div className='reviews bg-blue-500 text-white p-4 rounded-md'>
+                        <h2 className='text-xxl font-semibold mb-4'>Reviews</h2>
+                        {reviews.map((review, id) => {
+                            let result = review.carId == currentCarId ? (
+                                <div key={id} className='bg-white text-blue-500 p-3 mb-2 rounded-md shadow-md'>
+                                    <p className='font-medium'>
+                                        {review.customer} - {review.content}    
+                                    </p>
+                                    <span className='font-bold text-blue-700'> Rating: {review.rating}/10</span>
+                                </div>
+                            ) : (
+                                <></>
+                            );
+                            return result;
+                        })}
+                    </div>
 
                 </div> :
                 <div>
@@ -91,7 +126,7 @@ const CarPage = () => {
                 </div>
             }
 
-        </div>
+        </div >
     );
 };
 
