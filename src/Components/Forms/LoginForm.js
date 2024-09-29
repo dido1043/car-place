@@ -65,7 +65,7 @@ function LoginForm() {
             const response = await axios.post(`${process.env.REACT_APP_API_KEY}/login`, formData);
             if (response.status === 200) {
                 const token = `Bearer ${response.data.accessToken}`
-                const expirationTime = new Date().getTime() + 60 * 1300
+                const expirationTime = new Date().getTime() + 60 * 2000
                 localStorage.setItem('token', token)
                 localStorage.setItem('tokenExpiration', expirationTime.toString())
                 //console.log("Session ->"+session);
