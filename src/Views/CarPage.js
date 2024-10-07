@@ -69,12 +69,27 @@ const CarPage = () => {
     }
     useEffect(() => {
 
-        axios.get(`${process.env.REACT_APP_API_KEY}/cars/reviews/all`).then((respData) => {
+        const fetchReviews = async () => {
+            try {
+                const response = await axios.get(`${process.env.REACT_APP_API_KEY}/cars/reviews/all`).then((respData) => {
 
-            //console.log(respData.data);
-            setReviews(respData.data)
-        })
-    })
+                    //console.log(respData.data);
+                    setReviews(respData.data)
+                })
+            } catch (error) {
+                console.log(error);
+                
+            }
+
+        }
+
+        fetchReviews();
+
+        // Optional: Clean up to prevent unnecessary re-fetching
+        return () => {
+            setReviews([]);  // Optional: clear state when component unmounts
+        };
+    },[currentCarId])
     const toggleEdit = () => {
         setIsBtnClicked(!isBtnClicked);
     }
@@ -109,7 +124,7 @@ const CarPage = () => {
                             let result = review.carId == currentCarId ? (
                                 <div key={id} className='bg-white text-blue-500 p-3 mb-2 rounded-md shadow-md'>
                                     <p className='font-medium'>
-                                        {review.customer} - {review.content}    
+                                        {review.customer} - {review.content}
                                     </p>
                                     <span className='font-bold text-blue-700'> Rating: {review.rating}/10</span>
                                 </div>
