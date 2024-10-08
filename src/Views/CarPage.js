@@ -82,12 +82,12 @@ const CarPage = () => {
             }
 
         }
-
+        
         fetchReviews();
 
-        // Optional: Clean up to prevent unnecessary re-fetching
+        
         return () => {
-            setReviews([]);  // Optional: clear state when component unmounts
+            setReviews([]);  
         };
     },[currentCarId])
     const toggleEdit = () => {
@@ -99,7 +99,7 @@ const CarPage = () => {
         <div>
             {!isBtnClicked ?
                 <div className='container-page'>
-                    <img src={car.imageUrl} alt={`${car.make} ${car.model}`} className='car-img' />
+                     {car.imageUrl && <img src={car.imageUrl} alt={`${car.make} ${car.model}`} className='car-img' />}
                     <h1>{car.make}</h1>
                     <ul>
                         <li>Model: {car.model}</li>

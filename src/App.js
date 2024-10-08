@@ -38,7 +38,7 @@ function App() {
 
   useEffect(() => {
     const interval = setInterval(checkExpirationTime, 1000);
-
+    //window.location.reload(true);
     return () => {
       clearInterval(interval)
     };
