@@ -14,7 +14,8 @@ function Header() {
         localStorage.removeItem("role");
         localStorage.removeItem("token");
         setToken(null);
-        renderMenu()
+        renderMenu()       
+        
     };
     const deafaultMenu = [
         {
