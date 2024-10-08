@@ -57,6 +57,32 @@ function LoginForm() {
             console.error('Error data:', error);
         }
     }
+    const getUserId = async(email) =>{
+        try {
+            const params = {
+                email: email
+            };
+            console.log(params);
+
+            const response = await axios.get(`${process.env.REACT_APP_API_KEY}/id`, {
+                params: params,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*'
+                }
+            });
+            //console.log(response.data);
+
+
+            localStorage.setItem('userId', response.data);
+
+            navigate('/allCars');
+            window.location.reload(true);
+
+        } catch (error) {
+            console.error('Error data:', error);
+        }
+    }
     const handleLogin = async (e) => {
         setError([])
         e.preventDefault();
@@ -65,12 +91,14 @@ function LoginForm() {
             const response = await axios.post(`${process.env.REACT_APP_API_KEY}/login`, formData);
             if (response.status === 200) {
                 const token = `Bearer ${response.data.accessToken}`
-                const expirationTime = new Date().getTime() + 60 * 2000
+                const expirationTime = new Date().getTime() + 100 * 1800
                 localStorage.setItem('token', token)
                 localStorage.setItem('tokenExpiration', expirationTime.toString())
+                localStorage.setItem('user', formData.email)
                 //console.log("Session ->"+session);
 
                 getUserRole(formData.email);
+                getUserId(formData.email);
             } else {
                 setError('Login failed. Please try again.');
             }

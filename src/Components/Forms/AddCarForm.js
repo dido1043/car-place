@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Label from "../Shared/Label";
 import InputField from "../Shared/InputField";
 import axios from "axios";
@@ -12,10 +12,13 @@ function AddCarForm({ isEditable, carData }) {
         year: '',
         price: '',
         imageUrl: '',
-        hp:'',
-        description:''
+        hp: '',
+        description: ''
     });
     useEffect(() => {
+        console.log("OK!");
+        
+
         if (isEditable) {
             setCarData({
                 make: carData.make,
@@ -23,11 +26,11 @@ function AddCarForm({ isEditable, carData }) {
                 year: carData.year,
                 price: carData.price,
                 imageUrl: carData.imageUrl,
-                hp:carData.hp,
-                description:carData.description
+                hp: carData.hp,
+                description: carData.description
             })
         }
-    },[isEditable]) 
+    }, [isEditable])
     let navigate = useNavigate();
 
     const [errors, setErrors] = useState({});
@@ -51,7 +54,7 @@ function AddCarForm({ isEditable, carData }) {
         if (!carFormData.year) errors.year = "Invalid year of creation!"
         if (!carFormData.imageUrl) errors.imageUrl = "Invalid image url!"
         if (!carFormData.hp) errors.hp = "Invalid car hp!"
-        if (!carFormData.description) errors.description = "Invalid description!" 
+        if (!carFormData.description) errors.description = "Invalid description!"
         return errors;
 
     }
@@ -91,8 +94,8 @@ function AddCarForm({ isEditable, carData }) {
                     year: '',
                     price: '',
                     imageUrl: '',
-                    hp:'',
-                    description:''
+                    hp: '',
+                    description: ''
                 })
                 console.log(response);
 
@@ -109,7 +112,7 @@ function AddCarForm({ isEditable, carData }) {
 
     return (
         <div>
-            <form onSubmit={(isEditable? editCar : handleSubmit)}>
+            <form onSubmit={(isEditable ? editCar : handleSubmit)}>
 
                 <Label text="Brand" />
                 <InputField value={carFormData.make} name="make"
@@ -126,7 +129,7 @@ function AddCarForm({ isEditable, carData }) {
                 <Label text="Image URL" />
                 <InputField value={carFormData.imageUrl} name="imageUrl"
                     onChange={handleChange} placeholder="ImageUrl" type="text" error={errors.imageUrl} />
-                    <Label text="HP" />
+                <Label text="HP" />
                 <InputField value={carFormData.hp} name="hp"
                     onChange={handleChange} placeholder="HP" type="text" error={errors.hp} />
                 <Label text="Description" />
