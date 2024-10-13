@@ -73,7 +73,6 @@ const CarPage = () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_API_KEY}/cars/reviews/all`).then((respData) => {
 
-                    //console.log(respData.data);
                     setReviews(respData.data)
                 })
             } catch (error) {
