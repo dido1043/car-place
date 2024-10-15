@@ -8,11 +8,12 @@ import Label from '../Shared/Label';
 
 function AddReviewForm({ isEditable, reviewData }) {
     const [reviewFormData, setReviewFormData] = useState({
-        customer:localStorage.getItem('userId'),
+        customer: localStorage.getItem('userId'),
         carId: 0,
         content: '',
         rating: 0,
     });
+    const [isBtnClicked, setIsBtnClicked] = useState(false);
     //Take current carId from the page of the car (url)!!!
     const pathParts = window.location.pathname.split('/');
     const carId = Number(pathParts[pathParts.length - 1]);
@@ -28,7 +29,7 @@ function AddReviewForm({ isEditable, reviewData }) {
         }
         if (isEditable) {
             setReviewFormData({
-                customer:localStorage.getItem('userId'),
+                customer: localStorage.getItem('userId'),
                 carId: carId,
                 content: reviewData.content,
                 rating: reviewData.rating,
@@ -52,12 +53,24 @@ function AddReviewForm({ isEditable, reviewData }) {
         const errors = {};
         if (!reviewFormData.carId) errors.carId = "Invalid car!";
         if (!reviewFormData.content) errors.content = "Missing content!";
-        if (!reviewFormData.rating) errors.rating = "Invalid car!";
+        if (!reviewFormData.rating) errors.rating = "Invalid rating!";
         if (Number(reviewFormData.rating) > 10) errors.rating = "Rating cannot be over 10";
         return errors;
     }
-    //TODO: Add edit function 
-    //Error
+    const editReview = async (e) => {
+        e.preventDefault()
+        const params = new URLSearchParams(reviewFormData).toString();
+        try {
+            const response = await axios.put(`${process.env.REACT_APP_API_KEY}/cars/reviews/edit/${reviewData.id}?${params}`, null, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*'
+                }
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
     const handleSubmit = async (e) => {
         setErrors([])
         e.preventDefault();
@@ -73,7 +86,7 @@ function AddReviewForm({ isEditable, reviewData }) {
             console.log(response);
 
             setReviewFormData({
-                customer:localStorage.getItem('userId'),
+                customer: localStorage.getItem('userId'),
                 carId: carId,
                 content: '',
                 rating: '',
@@ -88,14 +101,17 @@ function AddReviewForm({ isEditable, reviewData }) {
     }
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={isEditable ? editReview : handleSubmit}>
                 <Label text="Content" />
                 <InputField value={reviewFormData.content} name="content"
                     onChange={handleChange} placeholder="Content" type="text" error={errors.content} />
                 <Label text="Rating" />
                 <InputField value={reviewFormData.rating} name="rating"
                     onChange={handleChange} placeholder="Rating" type="text" error={errors.rating} />
-                <BaseButton text="Share" type="submit" />
+                {isEditable ?
+                    <BaseButton text="Edit" type="submit" className="btn-edit"/> :
+                    <BaseButton text="Share" type="submit" />
+                }
             </form>
         </div>
     );
