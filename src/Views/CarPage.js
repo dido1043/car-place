@@ -5,6 +5,8 @@ import BaseButton from '../Components/Shared/BaseButton';
 import CarCard from "../Components/CarsCard";
 import AddCarForm from '../Components/Forms/AddCarForm';
 import '../assests/scss/carPage.scss'
+
+
 const CarPage = () => {
     const [formData, setFormData] = useState({
         make: '',
@@ -64,6 +66,7 @@ const CarPage = () => {
     const currentCarId = pathParts[pathParts.length - 1];
 
     const [reviews, setReviews] = useState([]);
+    const [isBtnEditReview, setIsBtnEditReview] = useState(false)
     const navigateToAddReview = () => {
         navigate(`/allCars/cars/reviews/add/${car.id}`)
     }
@@ -77,18 +80,22 @@ const CarPage = () => {
                 })
             } catch (error) {
                 console.log(error);
-                
+
             }
 
         }
-        
+
         fetchReviews();
 
-        
+
         return () => {
-            setReviews([]);  
+            setReviews([]);
         };
-    },[currentCarId])
+    }, [currentCarId])
+    const toggleEditReview = () =>{
+        setIsBtnEditReview(!isBtnEditReview);
+    }
+    //End review section
     const toggleEdit = () => {
         setIsBtnClicked(!isBtnClicked);
     }
@@ -98,7 +105,7 @@ const CarPage = () => {
         <div>
             {!isBtnClicked ?
                 <div className='container-page'>
-                     {car.imageUrl && <img src={car.imageUrl} alt={`${car.make} ${car.model}`} className='car-img' />}
+                    {car.imageUrl && <img src={car.imageUrl} alt={`${car.make} ${car.model}`} className='car-img' />}
                     <h1>{car.make}</h1>
                     <ul>
                         <li>Model: {car.model}</li>
@@ -126,6 +133,14 @@ const CarPage = () => {
                                         {review.customer} - {review.content}
                                     </p>
                                     <span className='font-bold text-blue-700'> Rating: {review.rating}/10</span>
+                                    {localStorage.getItem('user') == review.customer ?
+                                        <div>
+                                            <BaseButton onClick = {toggleEditReview} text="Edit"/>
+                                            <BaseButton text="Delete"/>
+                                        </div>
+                                         :
+                                        <></>
+                                    }
                                 </div>
                             ) : (
                                 <></>
