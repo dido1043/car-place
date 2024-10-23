@@ -92,14 +92,18 @@ const CarPage = () => {
             setReviews([]);
         };
     }, [currentCarId])
+    
     const toggleEditReview = () =>{
         setIsBtnEditReview(!isBtnEditReview);
+       // console.log(isBtnEditReview);
     }
     //End review section
     const toggleEdit = () => {
         setIsBtnClicked(!isBtnClicked);
+        
+        
     }
-
+//TODO: Reviews
     return (
 
         <div>
@@ -135,8 +139,9 @@ const CarPage = () => {
                                     <span className='font-bold text-blue-700'> Rating: {review.rating}/10</span>
                                     {localStorage.getItem('user') == review.customer ?
                                         <div>
-                                            <BaseButton onClick = {toggleEditReview} text="Edit"/>
+                                            <BaseButton onClick={toggleEditReview} text="Edit"/>
                                             <BaseButton text="Delete"/>
+                                            
                                         </div>
                                          :
                                         <></>
