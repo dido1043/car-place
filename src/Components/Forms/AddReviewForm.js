@@ -85,7 +85,7 @@ function AddReviewForm({ isEditable, reviewData }) {
         const temp = location.state.editData.id
         const params = {
             ...reviewFormData,
-            temp
+            id: temp
         }
 
         try {
