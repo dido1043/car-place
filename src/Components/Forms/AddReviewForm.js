@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from "axios";
 
 import BaseButton from "../Shared/BaseButton";
@@ -7,48 +7,46 @@ import InputField from "../Shared/InputField";
 import Label from '../Shared/Label';
 
 function AddReviewForm({ isEditable, reviewData }) {
+    const location = useLocation();
     const [reviewFormData, setReviewFormData] = useState({
         customer: localStorage.getItem('userId'),
         carId: 0,
         content: '',
         rating: 0,
     });
-    const [isBtnClicked, setIsBtnClicked] = useState(false);
-    //Take current carId from the page of the car (url)!!!
+
+    const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
+
     const pathParts = window.location.pathname.split('/');
     const carId = Number(pathParts[pathParts.length - 1]);
-    useEffect(() => {
 
-        console.log(carId);
-        // Ensure carId is correctly set in form data
+    useEffect(() => {
         if (carId) {
             setReviewFormData((prevData) => ({
                 ...prevData,
                 carId: carId
             }));
         }
-        if (isEditable) {
+
+        if (location.state?.editData) {
             setReviewFormData({
                 customer: localStorage.getItem('userId'),
                 carId: carId,
-                content: reviewData.content,
-                rating: reviewData.rating,
-            })
+                content: location.state.editData.content,
+                rating: location.state.editData.rating,
+            });
         }
-    }, [isEditable])
-    let navigate = useNavigate();
-
-
-    const [errors, setErrors] = useState({});
+    }, [carId, location.state]);
 
     const handleChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
         setReviewFormData({
             ...reviewFormData,
-            [name]: name == "rating" ? parseInt(value) : value
+            [name]: name === "rating" ? parseInt(value) : value
         });
-    }
+    };
 
     const validateErrors = () => {
         const errors = {};
@@ -57,70 +55,73 @@ function AddReviewForm({ isEditable, reviewData }) {
         if (!reviewFormData.rating) errors.rating = "Invalid rating!";
         if (Number(reviewFormData.rating) > 10) errors.rating = "Rating cannot be over 10";
         return errors;
-    }
-    let { data } = useParams();
-    console.log(data);
-    
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const reviewFormErrors = validateErrors();
+        if (Object.keys(reviewFormErrors).length === 0) {
+            try {
+                const response = await axios.post(`${process.env.REACT_APP_API_KEY}/cars/reviews/add`, reviewFormData, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': '*/*'
+                    }
+                });
+                console.log(response);
+                navigate(`/allCars`);
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            setErrors(reviewFormErrors);
+        }
+    };
+
     const editReview = async (e) => {
-        e.preventDefault()
-
-
-        console.log("Data: " + data)
+        e.preventDefault();
         try {
-            const response = await axios.put(`${process.env.REACT_APP_API_KEY}/cars/reviews/edit/${reviewData.id}?${data}`, null, {
+            const response = await axios.put(`${process.env.REACT_APP_API_KEY}/cars/reviews/edit/${location.state.editData.id}`, reviewFormData, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': '*/*'
                 }
             });
+            navigate(`/allCars`);
         } catch (error) {
             console.log(error);
         }
-    }
-    const handleSubmit = async (e) => {
-        setErrors([])
-        e.preventDefault();
-        const reviewFormErrors = validateErrors();
-        //if (Object.keys(reviewFormErrors).length === 0) {
-        try {
-            const response = await axios.post(`${process.env.REACT_APP_API_KEY}/cars/reviews/add`, reviewFormData, {
-                header: {
-                    'Content-Type': 'application/json',
-                    'Accept': '*/*'
-                }
-            });
-            console.log(response);
+    };
 
-            setReviewFormData({
-                customer: localStorage.getItem('userId'),
-                carId: carId,
-                content: '',
-                rating: '',
-            })
-            navigate(`/allCars`)
-        } catch (error) {
-            console.log(error);
-        }
-        //} else {
-        //     setErrors(reviewFormErrors);
-        //}
-    }
     return (
         <div>
             <form onSubmit={isEditable ? editReview : handleSubmit}>
                 <Label text="Content" />
-                <InputField value={reviewFormData.content} name="content"
-                    onChange={handleChange} placeholder="Content" type="text" error={errors.content} />
+                <InputField
+                    value={reviewFormData.content}
+                    name="content"
+                    onChange={handleChange}
+                    placeholder="Content"
+                    type="text"
+                    error={errors.content}
+                />
                 <Label text="Rating" />
-                <InputField value={reviewFormData.rating} name="rating"
-                    onChange={handleChange} placeholder="Rating" type="text" error={errors.rating} />
-                {isEditable ?
-                    <BaseButton text="Edit" type="submit" className="btn-edit" /> :
+                <InputField
+                    value={reviewFormData.rating}
+                    name="rating"
+                    onChange={handleChange}
+                    placeholder="Rating"
+                    type="number"
+                    error={errors.rating}
+                />
+                {isEditable ? (
+                    <BaseButton text="Edit" type="submit" className="btn-edit" />
+                ) : (
                     <BaseButton text="Share" type="submit" />
-                }
+                )}
             </form>
         </div>
     );
-
 }
+
 export default AddReviewForm;

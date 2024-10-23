@@ -70,10 +70,11 @@ const CarPage = () => {
     const navigateToAddReview = (editData) => {
         if (editData) {
             navigate(`/allCars/cars/reviews/add/${car.id}`, {
-                data: editData
-            })
+                state: { editData }
+            });
+        } else {
+            navigate(`/allCars/cars/reviews/add/${car.id}`);
         }
-        navigate(`/allCars/cars/reviews/add/${car.id}`)
     }
 
     useEffect(() => {
