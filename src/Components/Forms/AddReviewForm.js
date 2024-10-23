@@ -80,21 +80,28 @@ function AddReviewForm({ isEditable, reviewData }) {
 
     const editReview = async (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.put(`${process.env.REACT_APP_API_KEY}/cars/reviews/edit/${location.state.editData.id}`, reviewFormData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': '*/*'
-                }
-            });
-            navigate(`/allCars`);
-        } catch (error) {
-            console.log(error);
-        }
+        console.log(location.state.editData.id);
+        console.log(reviewFormData.id);
+        
+        
+        // try {
+        //     const response = await axios.put(`${process.env.REACT_APP_API_KEY}/cars/reviews/edit/${location.state.editData.id}`, reviewFormData, {
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'Accept': '*/*'
+        //         }
+        //     });
+        //     navigate(`/allCars`);
+        // } catch (error) {
+        //     console.log(error);
+        // }
     };
 
     return (
         <div>
+            <div>
+                {isEditable}
+            </div>
             <form onSubmit={isEditable ? editReview : handleSubmit}>
                 <Label text="Content" />
                 <InputField
