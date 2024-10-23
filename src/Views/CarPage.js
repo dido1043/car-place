@@ -143,15 +143,14 @@ const CarPage = () => {
                                         {review.customer} - {review.content}
                                     </p>
                                     <span className='font-bold text-blue-700'> Rating: {review.rating}/10</span>
-                                    {localStorage.getItem('user') == review.customer ?
+                                    {localStorage.getItem('user') == review.customer ? (
                                         <div>
-                                            <BaseButton onClick={toggleEditReview(review)} text="Edit" />
+                                            <BaseButton onClick={() => toggleEditReview(review)} text="Edit" />
                                             <BaseButton text="Delete" />
-
                                         </div>
-                                        :
+                                    ) : (
                                         <></>
-                                    }
+                                    )}
                                 </div>
                             ) : (
                                 <></>
