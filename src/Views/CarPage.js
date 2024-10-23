@@ -84,18 +84,17 @@ const CarPage = () => {
                         'Content-Type': 'application/json',
                         'Accept': '*/*'
                     }
-                })
+                });
 
-                setReviews(response.data)
+                setReviews(response.data);
 
             } catch (error) {
                 console.log(error);
-
             }
         }
-        fetchReviews()
+        fetchReviews();
 
-    }, [reviews])
+    }, []);
 
 
 
