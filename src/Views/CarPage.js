@@ -21,7 +21,7 @@ const CarPage = () => {
     const [car, setCar] = useState(location);
 
     const [isBtnClicked, setIsBtnClicked] = useState(false);
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const [handleError, setHandleError] = useState({
         status: '',
         message: ''
@@ -67,7 +67,12 @@ const CarPage = () => {
 
     const [reviews, setReviews] = useState([]);
     const [isBtnEditReview, setIsBtnEditReview] = useState(false)
-    const navigateToAddReview = () => {
+    const navigateToAddReview = (editData) => {
+        if (editData) {
+            navigate(`/allCars/cars/reviews/add/${car.id}`, {
+                data: editData
+            })
+        }
         navigate(`/allCars/cars/reviews/add/${car.id}`)
     }
     useEffect(() => {
@@ -92,18 +97,19 @@ const CarPage = () => {
             setReviews([]);
         };
     }, [currentCarId])
-    
-    const toggleEditReview = () =>{
+
+    const toggleEditReview = (review) => {
         setIsBtnEditReview(!isBtnEditReview);
-       // console.log(isBtnEditReview);
+        navigateToAddReview(review)
+        // console.log(isBtnEditReview);
     }
     //End review section
     const toggleEdit = () => {
         setIsBtnClicked(!isBtnClicked);
-        
-        
+
+
     }
-//TODO: Reviews
+    //TODO: Reviews
     return (
 
         <div>
@@ -139,11 +145,11 @@ const CarPage = () => {
                                     <span className='font-bold text-blue-700'> Rating: {review.rating}/10</span>
                                     {localStorage.getItem('user') == review.customer ?
                                         <div>
-                                            <BaseButton onClick={toggleEditReview} text="Edit"/>
-                                            <BaseButton text="Delete"/>
-                                            
+                                            <BaseButton onClick={toggleEditReview(review)} text="Edit" />
+                                            <BaseButton text="Delete" />
+
                                         </div>
-                                         :
+                                        :
                                         <></>
                                     }
                                 </div>

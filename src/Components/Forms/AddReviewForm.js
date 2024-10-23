@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from "axios";
 
 import BaseButton from "../Shared/BaseButton";
@@ -37,6 +37,9 @@ function AddReviewForm({ isEditable, reviewData }) {
         }
     }, [isEditable])
     let navigate = useNavigate();
+
+    let data = useParams()
+    console.log(data)
 
     const [errors, setErrors] = useState({});
 
@@ -109,7 +112,7 @@ function AddReviewForm({ isEditable, reviewData }) {
                 <InputField value={reviewFormData.rating} name="rating"
                     onChange={handleChange} placeholder="Rating" type="text" error={errors.rating} />
                 {isEditable ?
-                    <BaseButton text="Edit" type="submit" className="btn-edit"/> :
+                    <BaseButton text="Edit" type="submit" className="btn-edit" /> :
                     <BaseButton text="Share" type="submit" />
                 }
             </form>
