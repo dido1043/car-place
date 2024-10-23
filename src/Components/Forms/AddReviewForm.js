@@ -82,10 +82,14 @@ function AddReviewForm({ isEditable, reviewData }) {
         e.preventDefault();
         console.log(location.state.editData.id);
         console.log(reviewFormData);
-
+        const temp = location.state.editData.id
+        const params = {
+            ...reviewFormData,
+            temp
+        }
 
         try {
-            const response = await axios.put(`${process.env.REACT_APP_API_KEY}/cars/reviews/edit/${location.state.editData.id}`, reviewFormData, {
+            const response = await axios.put(`${process.env.REACT_APP_API_KEY}/cars/reviews/edit/${location.state.editData.id}`, params, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': '*/*'
