@@ -33,6 +33,7 @@ const CarPage = () => {
         //console.log(pathParts);
         if (location) {
             setCar(location);
+            fetchReviews()
         }
     }, [location]);
 
@@ -75,28 +76,21 @@ const CarPage = () => {
         }
         navigate(`/allCars/cars/reviews/add/${car.id}`)
     }
-    useEffect(() => {
 
-        const fetchReviews = async () => {
-            try {
-                const response = await axios.get(`${process.env.REACT_APP_API_KEY}/cars/reviews/all`).then((respData) => {
 
-                    setReviews(respData.data)
-                })
-            } catch (error) {
-                console.log(error);
+    const fetchReviews = async () => {
+        try {
+            const response = await axios.get(`${process.env.REACT_APP_API_KEY}/cars/reviews/all`).then((respData) => {
 
-            }
+                setReviews(respData.data)
+            })
+        } catch (error) {
+            console.log(error);
 
         }
 
-        fetchReviews();
+    }
 
-
-        return () => {
-            setReviews([]);
-        };
-    }, [currentCarId])
 
     const toggleEditReview = (review) => {
         setIsBtnEditReview(!isBtnEditReview);
