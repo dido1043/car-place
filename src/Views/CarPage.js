@@ -94,7 +94,7 @@ const CarPage = () => {
         }
         fetchReviews();
 
-    }, []);
+    }, [currentCarId]);
 
 
 
