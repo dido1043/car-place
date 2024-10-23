@@ -20,24 +20,34 @@ function AddReviewForm({ isEditable, reviewData }) {
 
     const pathParts = window.location.pathname.split('/');
     const carId = Number(pathParts[pathParts.length - 1]);
-
     useEffect(() => {
-        if (carId) {
-            setReviewFormData((prevData) => ({
-                ...prevData,
-                carId: carId
-            }));
-        }
-
-        if (location.state?.editData) {
+        if (isEditable) {
             setReviewFormData({
                 customer: localStorage.getItem('userId'),
                 carId: carId,
-                content: location.state.editData.content,
-                rating: location.state.editData.rating,
-            });
+                content: reviewData.content,
+                rating: reviewData.rating,
+            })
+
         }
-    }, [carId, location.state]);
+    },[isEditable, reviewData, carId]);
+    // useEffect(() => {
+    //     if (carId) {
+    //         setReviewFormData((prevData) => ({
+    //             ...prevData,
+    //             carId: carId
+    //         }));
+    //     }
+
+    //     if (location.state?.editData) {
+    //         setReviewFormData({
+    //             customer: localStorage.getItem('userId'),
+    //             carId: carId,
+    //             content: location.state.editData.content,
+    //             rating: location.state.editData.rating,
+    //         });
+    //     }
+    // }, [carId, location.state]);
 
     const handleChange = (e) => {
         const name = e.target.name;
@@ -80,16 +90,16 @@ function AddReviewForm({ isEditable, reviewData }) {
 
     const editReview = async (e) => {
         e.preventDefault();
-        console.log(location.state.editData.id);
+       // console.log(location.state.editData.id);
         console.log(reviewFormData);
-        const temp = location.state.editData.id
-        const params = {
-            ...reviewFormData,
-            id: temp
-        }
+        //const temp = location.state.editData.id
+        // const params = {
+        //     ...reviewFormData,
+        //     id: temp
+        // }
 
         try {
-            const response = await axios.put(`${process.env.REACT_APP_API_KEY}/cars/reviews/edit/${location.state.editData.id}`, params, {
+            const response = await axios.put(`${process.env.REACT_APP_API_KEY}/cars/reviews/edit/${reviewData.id}`, reviewFormData,{
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': '*/*'
@@ -103,7 +113,7 @@ function AddReviewForm({ isEditable, reviewData }) {
 
     return (
         <div>
-            <form onSubmit={isEditable ? handleSubmit : editReview}>
+            <form onSubmit={isEditable == true ? editReview : handleSubmit}>
                 <Label text="Content" />
                 <InputField
                     value={reviewFormData.content}

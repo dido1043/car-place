@@ -5,6 +5,7 @@ import BaseButton from '../Components/Shared/BaseButton';
 import CarCard from "../Components/CarsCard";
 import AddCarForm from '../Components/Forms/AddCarForm';
 import '../assests/scss/carPage.scss'
+import AddReviewForm from '../Components/Forms/AddReviewForm';
 
 
 const CarPage = () => {
@@ -67,6 +68,7 @@ const CarPage = () => {
 
     const [reviews, setReviews] = useState([]);
     const [isBtnEditReview, setIsBtnEditReview] = useState(false)
+    const [currentReview, setCurrentReview] = useState(null)
     const navigateToAddReview = (editData) => {
         if (editData) {
             navigate(`/allCars/cars/reviews/add/${car.id}`, {
@@ -101,8 +103,9 @@ const CarPage = () => {
 
     const toggleEditReview = (review) => {
         setIsBtnEditReview(!isBtnEditReview);
-        navigateToAddReview(review)
-        // console.log(isBtnEditReview);
+        setCurrentReview(review)
+        console.log(review);
+        
     }
     //End review section
     const toggleEdit = () => {
@@ -110,7 +113,9 @@ const CarPage = () => {
 
 
     }
+    
     //TODO: Reviews
+    
     return (
 
         <div>
@@ -131,40 +136,52 @@ const CarPage = () => {
                             <BaseButton onClick={deleteCar} text="Delete"> </BaseButton>
                         </> :
                         <>
-                            <BaseButton onClick={navigateToAddReview} text="Add review"></BaseButton>
+                            
                         </>
                     }
 
-                    <div className='reviews bg-blue-500 text-white p-4 rounded-md'>
-                        <h2 className='text-xxl font-semibold mb-4'>Reviews</h2>
-                        {reviews.map((review, id) => {
-                            let result = review.carId == currentCarId ? (
-                                <div key={id} className='bg-white text-blue-500 p-3 mb-2 rounded-md shadow-md'>
-                                    <p className='font-medium'>
-                                        {review.customer} - {review.content}
-                                    </p>
-                                    <span className='font-bold text-blue-700'> Rating: {review.rating}/10</span>
-                                    {localStorage.getItem('user') == review.customer ? (
-                                        <div>
-                                            <BaseButton onClick={() => toggleEditReview(review)} text="Edit" />
-                                            <BaseButton text="Delete" />
-                                        </div>
-                                    ) : (
-                                        <></>
-                                    )}
-                                </div>
-                            ) : (
-                                <></>
-                            );
-                            return result;
-                        })}
-                    </div>
 
                 </div> :
                 <div>
                     <AddCarForm isEditable={isBtnClicked} carData={car}></AddCarForm>
                 </div>
             }
+            {!isBtnEditReview ? 
+                 <div className='reviews bg-blue-500 text-white p-4 rounded-md'>
+                 <h2 className='text-xxl font-semibold mb-4'>Reviews</h2>
+                 <BaseButton onClick={navigateToAddReview} text="Add review"></BaseButton>
+                 {reviews.map((review, id) => {
+                    
+                     let result = review.carId == currentCarId ? (
+                         <div key={id} className='bg-white text-blue-500 p-3 mb-2 rounded-md shadow-md'>
+                             <p className='font-medium'>
+                                 {review.id} - {review.customer} - {review.content}
+                             </p>
+                             <span className='font-bold text-blue-700'> Rating: {review.rating}/10</span>
+                             {localStorage.getItem('user') == review.customer ? (
+                                 <div>
+                                     <BaseButton onClick={() => toggleEditReview(review)} text="Edit" />
+                                     <BaseButton text="Delete" />
+                                 </div>
+                             ) : (
+                                 <></>
+                             )}
+                         </div>
+                     ) : (
+                         <></>
+                     );
+                     return result;
+                 })}
+             </div>:
+             //TODO: Take current review by id!!!!!
+            <div>
+                {/** currentReview is undefined */}
+                <AddReviewForm isEditable={true} reviewData={currentReview}/>
+            </div>
+             
+
+            }
+           
 
         </div >
     );
