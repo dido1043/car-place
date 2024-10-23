@@ -95,7 +95,7 @@ const CarPage = () => {
         }
         fetchReviews()
 
-    }, [])
+    }, [reviews])
 
 
 
