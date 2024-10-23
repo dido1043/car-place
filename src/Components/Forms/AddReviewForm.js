@@ -38,8 +38,6 @@ function AddReviewForm({ isEditable, reviewData }) {
     }, [isEditable])
     let navigate = useNavigate();
 
-    let data = useParams()
-    console.log(data)
 
     const [errors, setErrors] = useState({});
 
@@ -60,11 +58,16 @@ function AddReviewForm({ isEditable, reviewData }) {
         if (Number(reviewFormData.rating) > 10) errors.rating = "Rating cannot be over 10";
         return errors;
     }
+    let { data } = useParams();
+    console.log(data);
+    
     const editReview = async (e) => {
         e.preventDefault()
-        const params = new URLSearchParams(reviewFormData).toString();
+
+
+        console.log("Data: " + data)
         try {
-            const response = await axios.put(`${process.env.REACT_APP_API_KEY}/cars/reviews/edit/${reviewData.id}?${params}`, null, {
+            const response = await axios.put(`${process.env.REACT_APP_API_KEY}/cars/reviews/edit/${reviewData.id}?${data}`, null, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': '*/*'
