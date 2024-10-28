@@ -4,6 +4,9 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    spacing: {
+      '1.25': '5px', // Adding 5px as a custom spacing option
+    },
     colors: {
       'blue': '#1fb6ff',
       'purple': '#7e5bef',

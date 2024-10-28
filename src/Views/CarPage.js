@@ -184,12 +184,12 @@ const CarPage = () => {
                         let result = review.carId == currentCarId ? (
                             <div key={id} className='bg-white text-blue-500 p-3 mb-2 rounded-md shadow-md'>
                                 <p className='font-medium'>
-                                    {review.id} - {review.customer} - {review.content}
+                                    {review.customer} - {review.content}
                                 </p>
                                 <span className='font-bold text-blue-700'> Rating: {review.rating}/10</span>
                                 {localStorage.getItem('user') == review.customer ? (
-                                    <div>
-                                        <BaseButton onClick={() => toggleEditReview(review)} text="Edit" />
+                                    <div className='flex flex-row'>
+                                        <BaseButton onClick={() => toggleEditReview(review)} text="Edit"  className='mr-1.25'/>
                                         <BaseButton onClick={() => deleteReview(review)} text="Delete" />
                                     </div>
                                 ) : (
