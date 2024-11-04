@@ -114,7 +114,7 @@ const CarPage = () => {
                 console.error("No review selected for deletion.");
                 return;
             }
-            
+
             // Delete request to server
             await axios.delete(`${process.env.REACT_APP_API_KEY}/cars/reviews/delete/${review.id}`, {
                 headers: {
@@ -122,11 +122,11 @@ const CarPage = () => {
                     'Accept': '*/*'
                 }
             });
-    
+
             // Remove review locally to update the UI
             setReviews(prevReviews => prevReviews.filter(r => r.id !== review.id));
             setCurrentReview(null); // Reset currentReview after deletion
-    
+
         } catch (error) {
             setHandleError({
                 icon: "fi fi-rr-warning",
@@ -176,31 +176,32 @@ const CarPage = () => {
                 </div>
             }
             {!isBtnEditReview ?
-                <div className='reviews bg-blue-500 text-white p-4 rounded-md'>
-                    <h2 className='text-xxl font-semibold mb-4'>Reviews</h2>
-                    <BaseButton onClick={navigateToAddReview} text="Add review"></BaseButton>
-                    {reviews.map((review, id) => {
-
-                        let result = review.carId == currentCarId ? (
-                            <div key={id} className='bg-white text-blue-500 p-3 mb-2 rounded-md shadow-md'>
-                                <p className='font-medium'>
-                                    {review.customer} - {review.content}
-                                </p>
-                                <span className='font-bold text-blue-700'> Rating: {review.rating}/10</span>
-                                {localStorage.getItem('user') == review.customer ? (
-                                    <div className='flex flex-row'>
-                                        <BaseButton onClick={() => toggleEditReview(review)} text="Edit"  className='mr-1.25'/>
-                                        <BaseButton onClick={() => deleteReview(review)} text="Delete" />
-                                    </div>
-                                ) : (
-                                    <></>
-                                )}
-                            </div>
-                        ) : (
-                            <></>
-                        );
-                        return result;
-                    })}
+                <div className="reviews bg-blue-500 text-white p-4 rounded-md flex justify-center items-center">
+                    <div className="w-full max-w-2xl">
+                        <h2 className="text-xxl font-semibold mb-4">Reviews</h2>
+                        {localStorage.getItem('role') == 'Admin' ? <></> : <BaseButton onClick={navigateToAddReview} text="Add review"></BaseButton>}
+                        {reviews.map((review, id) => {
+                            let result = review.carId == currentCarId ? (
+                                <div key={id} className="bg-white text-blue-500 p-3 mb-2 rounded-md shadow-md">
+                                    <p className="font-medium">
+                                        {review.customer} - {review.content}
+                                    </p>
+                                    <span className="font-bold text-blue-700"> Rating: {review.rating}/10</span>
+                                    {localStorage.getItem('user') == review.customer ? (
+                                        <div className="flex flex-row">
+                                            <BaseButton onClick={() => toggleEditReview(review)} text="Edit" className="mr-1.25" />
+                                            <BaseButton onClick={() => deleteReview(review)} text="Delete" />
+                                        </div>
+                                    ) : (
+                                        <></>
+                                    )}
+                                </div>
+                            ) : (
+                                <></>
+                            );
+                            return result;
+                        })}
+                    </div>
                 </div> :
                 //TODO: Take current review by id!!!!!
                 <div>

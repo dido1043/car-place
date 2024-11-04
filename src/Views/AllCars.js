@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import CarCard from "../Components/CarsCard"
+import '../assests/scss/allCars.scss'
 import axios from 'axios'
 import { Link } from "react-router-dom"
 function AllCars() {
@@ -25,8 +26,8 @@ function AllCars() {
 
   return (
     <div className="container ">
-      <h2 className="text-3xl font-bold mb-4 text-center	">All cars</h2>
-      <div className="flex flex-wrap justify-center">
+      <h2 className="text-3xl font-bold mb-4 text-center">All cars</h2>
+      <div className="all-cars place-content-center">
 
         {cars.length > 0 ? (
           cars.map((car, index) => (
