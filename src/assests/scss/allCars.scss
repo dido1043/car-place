@@ -1,0 +1,9 @@
+.container {
+    width: 80%; // or any other fixed width
+    margin: 0 auto;
+  }
+.all-cars{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Example for responsive cards */
+    gap: 20px; /* Adjust the gap value as needed */
+}
