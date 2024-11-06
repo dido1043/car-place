@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import "../../assests/scss/header.scss";
 import logoRight from '../../assests/images/logo.webp';
 import logoLeft from '../../assests/images/logo2.webp';
@@ -11,10 +11,13 @@ function Header() {
     console.log(token);
     
     const LogoutFn = () => {
-        localStorage.removeItem("role");
-        localStorage.removeItem("token");
+        // localStorage.removeItem("role");
+        // localStorage.removeItem("token");
+        // localStorage.removeItem("user");
+        localStorage.clear()
         setToken(null);
-        renderMenu()       
+        renderMenu()   
+        Navigate('/');    
         
     };
     const deafaultMenu = [
