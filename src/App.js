@@ -14,6 +14,8 @@ import Login from './Views/Login';
 import Home from './Views/Home';
 import AddReview from './Views/AddReview'; 
 import { useNavigate } from 'react-router-dom';
+import RentRequests from './Views/RentRequests';
+import AdminPage from './Views/AdminPage';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -57,6 +59,8 @@ function App() {
                 <Route path="/cars/add" element={<AddCar />} />
                 <Route path="/allCars" element={<AllCars />} />
                 <Route path="/allCars/cars/:id" element={<CarPage />} />
+                <Route path="/allCars/cars/rentrequests" element={<RentRequests />} />
+                <Route path="/admin" element={<AdminPage/>}/>
                 <Route path="*" element={<NotFoundPage />} />
               </> :
               <>

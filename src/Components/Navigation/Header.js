@@ -11,9 +11,6 @@ function Header() {
     console.log(token);
     
     const LogoutFn = () => {
-        // localStorage.removeItem("role");
-        // localStorage.removeItem("token");
-        // localStorage.removeItem("user");
         localStorage.clear()
         setToken(null);
         renderMenu()   
@@ -51,6 +48,10 @@ function Header() {
         {
             path: "/allCars",
             name: "All"
+        },
+        {
+            path:"/admin",
+            name:"Admin page"
         },
         {
             path: "/login",
