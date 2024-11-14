@@ -6,10 +6,14 @@ function AdminPage() {
     const navigateToAllRequests = async () => {
         await nav("/allCars/cars/rentrequests")
     }
+    const navigateToAllUsers = async () => {
+        await nav("/users")
+    }
     return (
         <div>
             <h1>Admin page</h1>
             <BaseButton text="Rent requests" onClick={navigateToAllRequests}/>
+            <BaseButton text="All users" onClick={navigateToAllUsers}/>
         </div>
     )
 
