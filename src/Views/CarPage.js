@@ -143,7 +143,6 @@ const CarPage = () => {
 
     }
 
-    //TODO: Reviews
 
     return (
 
@@ -161,7 +160,7 @@ const CarPage = () => {
                     <div className='description-box'>{car.description}</div>
                     {role == "Admin" ?
                         <>
-                            <BaseButton onClick={toggleEdit} text="Edit"> </BaseButton>
+                            <BaseButton onClick={toggleEdit} text="Edit"/>
                             <BaseButton onClick={deleteCar} text="Delete"> </BaseButton>
                         </> :
                         <>
