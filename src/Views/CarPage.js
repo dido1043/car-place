@@ -159,10 +159,10 @@ const CarPage = () => {
                     </ul>
                     <div className='description-box'>{car.description}</div>
                     {role == "Admin" ?
-                        <>
+                        <div className='buttons'>
                             <BaseButton onClick={toggleEdit} text="Edit"/>
-                            <BaseButton onClick={deleteCar} text="Delete"> </BaseButton>
-                        </> :
+                            <button onClick={deleteCar} className='del-btn mt-2 mb-2'>Delete</button>
+                        </div> :
                         <>
 
                         </>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import BaseButton from "../Components/Shared/BaseButton";
+import '../assests/scss/adminPage.scss'
 function AdminPage() {
     const nav = useNavigate();
     const navigateToAllRequests = async () => {
@@ -10,10 +11,10 @@ function AdminPage() {
         await nav("/users")
     }
     return (
-        <div>
+        <div className="ctr">
             <h1>Admin page</h1>
-            <BaseButton text="Rent requests" onClick={navigateToAllRequests}/>
-            <BaseButton text="All users" onClick={navigateToAllUsers}/>
+            <BaseButton className="btn" text="Rent requests" onClick={navigateToAllRequests}/>
+            <BaseButton className="btn" text="All users" onClick={navigateToAllUsers}/>
         </div>
     )
 

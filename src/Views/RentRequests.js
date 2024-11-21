@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 
+import BaseButton from '../Components/Shared/BaseButton';
 function RentRequests() {
     const [requests, setRequests] = useState([]);
 
@@ -22,6 +23,26 @@ function RentRequests() {
         showRequests();
     }, []);
 
+
+    const deleteRequest = (request) =>{
+        try {
+            if (!request) {
+                console.error("No request selected for deletion.");
+                return;
+            }
+
+            axios.delete(`${process.env.REACT_APP_API_KEY}/cars/requests/delete/${request.id}`,{
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*'
+                }
+            })
+            window.location.reload();
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
     return (
         <div>
             <h1>Rent requests</h1>
@@ -34,7 +55,7 @@ function RentRequests() {
                         </div>
                         <div className="mt-4 flex items-center justify-between">
                             <p className="text-sm font-medium text-gray-500">User: <span className="text-green-600">{request.user}</span></p>
-                            <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">Ready</a>
+                            <BaseButton text="Ready" onClick={() => deleteRequest(request)}/>
                         </div>
                     </div>
                 </div>
