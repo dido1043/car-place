@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+    /* Ensures this section grows to fill available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+footer {
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 52%, rgba(0, 212, 255, 1) 100%);
+    padding: 20px;
+    font-size: 0.9rem;
+    color: #dcdcdc;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+}
