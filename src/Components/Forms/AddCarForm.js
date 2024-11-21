@@ -5,6 +5,7 @@ import InputField from "../Shared/InputField";
 import axios from "axios";
 import BaseButton from "../Shared/BaseButton";
 
+import '../../assests/scss/addCar.scss'
 function AddCarForm({ isEditable, carData }) {
     const [carFormData, setCarData] = useState({
         make: '',
@@ -138,7 +139,7 @@ function AddCarForm({ isEditable, carData }) {
             console.log(error);
         }
     }
-
+    //Add styling to the image input
     return (
         <div>
             <form onSubmit={isEditable ? editCar : handleSubmit}>
@@ -178,8 +179,11 @@ function AddCarForm({ isEditable, carData }) {
                     type="text"
                     error={errors.price}
                 />
-                <Label text="Image" />
+                <label class="text-sm text-gray-400 font-medium leading-none peer-disabled:cursor-not-allowed 
+                peer-disabled:opacity-70" text="Image" />
                 <input
+                     class="flex w-full rounded-md border border-blue-300 border-input bg-white text-sm text-gray-400 
+                     file:border-0 file:bg-blue-600 file:text-white file:text-sm file:font-medium"
                     type="file"
                     onChange={handleFileChange}
                     accept="image/*"
