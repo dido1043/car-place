@@ -142,8 +142,37 @@ const CarPage = () => {
 
 
     }
+    //Rent request
 
+    const [request, setRequest] = useState({
+        user: "",
+        carId: 0
+    });
 
+    useEffect(() => {
+        setRequest({
+            user: localStorage.getItem("userId"),
+            carId: currentCarId
+        });
+        console.log(request);
+        
+    },[currentCarId]);
+
+    const handleRequest = async() =>{
+        try {
+            const response = axios.post(`${process.env.REACT_APP_API_KEY}/cars/requests/add`, request, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            console.log("Rent request submitted successfully:", response.data);
+            
+            return response.data; 
+        } catch (error) {
+            console.error("Error submitting rent request:", error);
+            
+        }
+    }
     return (
 
         <div>
@@ -160,7 +189,7 @@ const CarPage = () => {
                     <div className='description-box'>{car.description}</div>
                     {role == "Admin" ?
                         <div className='buttons'>
-                            <BaseButton onClick={toggleEdit} text="Edit"/>
+                            <BaseButton onClick={toggleEdit} text="Edit" />
                             <button onClick={deleteCar} className='del-btn mt-2 mb-2'>Delete</button>
                         </div> :
                         <>
@@ -178,7 +207,13 @@ const CarPage = () => {
                 <div className="reviews bg-blue-500 text-white p-4 rounded-md flex justify-center items-center">
                     <div className="w-full max-w-2xl">
                         <h2 className="text-xxl font-semibold mb-4">Reviews</h2>
-                        {localStorage.getItem('role') == 'Admin' ? <></> : <BaseButton onClick={navigateToAddReview} text="Add review"></BaseButton>}
+                        {localStorage.getItem('role') == 'Admin' ? <></> :
+                            <div>
+                                <BaseButton onClick={navigateToAddReview} text="Add review"></BaseButton>
+                                <BaseButton onClick={handleRequest} text="Rent" />
+                            </div>
+
+                        }
                         {reviews.map((review, id) => {
                             let result = review.carId == currentCarId ? (
                                 <div key={id} className="bg-white text-blue-500 p-3 mb-2 rounded-md shadow-md">
