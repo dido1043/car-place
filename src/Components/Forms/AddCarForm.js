@@ -16,7 +16,7 @@ function AddCarForm({ isEditable, carData }) {
         hp: '',
         description: ''
     });
-
+    
     const [imagePreview, setImagePreview] = useState(''); // For displaying image preview
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
