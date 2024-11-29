@@ -17,6 +17,8 @@ import { useNavigate } from 'react-router-dom';
 import RentRequests from './Views/RentRequests';
 import AdminPage from './Views/AdminPage';
 import Users from './Views/Users';
+import ServiceRecords from './Views/ServiceRecords';
+import SortedCarsByPrice from './Views/SortedCarsByPrice';
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [role, setRole] = useState(() => localStorage.getItem('role'));
@@ -69,6 +71,8 @@ function App() {
                 <Route path="/allCars" element={<AllCars />} />
                 <Route path="/allCars/cars/:id" element={<CarPage />} />
                 <Route path="/allCars/cars/reviews/add/:carId" element = {<AddReview/>}/>
+                <Route path="/allCars/cars/serviceRecords/all/:carId" element={<ServiceRecords/>}/>
+                <Route path="/allCars/cars/sorted" element={<SortedCarsByPrice/>}/>
                 <Route path="*" element={<NotFoundPage />} /> 
               </>
             }
