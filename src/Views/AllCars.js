@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import CarCard from "../Components/CarsCard"
 import '../assests/scss/allCars.scss'
 import axios from 'axios'
 import { Link } from "react-router-dom"
+import BaseButton from "../Components/Shared/BaseButton"
 function AllCars() {
   const [cars, setCars] = useState([])
-
+  const nav = useNavigate();
   useEffect(() => {
     const showCars = async () => {
       try {
@@ -23,12 +25,16 @@ function AllCars() {
 
     showCars()
   }, []);
+  const navigateToSortedCars = () =>{
+    nav("/allCars/cars/sorted");
+  }
 
   return (
     <div className="container ">
       <h2 className="text-3xl font-bold mb-4 text-center">All cars</h2>
+      <BaseButton onClick={navigateToSortedCars} text="Sort by price"/>
       <div className="all-cars place-content-center">
-
+      
         {cars.length > 0 ? (
           cars.map((car, index) => (
             <div key={index} className="m-4">

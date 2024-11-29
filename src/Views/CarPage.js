@@ -173,6 +173,11 @@ const CarPage = () => {
             
         }
     }
+
+    //Service records
+    const redirectToServiceRecords = (carId) =>{
+        navigate(`/allCars/cars/serviceRecords/all/${carId}`)
+    }
     return (
 
         <div>
@@ -208,9 +213,10 @@ const CarPage = () => {
                     <div className="w-full max-w-2xl">
                         <h2 className="text-xxl font-semibold mb-4">Reviews</h2>
                         {localStorage.getItem('role') == 'Admin' ? <></> :
-                            <div>
+                            <div className='flex flex-row gap-2'>
                                 <BaseButton onClick={navigateToAddReview} text="Add review"></BaseButton>
                                 <BaseButton onClick={handleRequest} text="Rent" />
+                                <BaseButton onClick={() => redirectToServiceRecords(currentCarId)} text="Service records" />
                             </div>
 
                         }
@@ -229,7 +235,9 @@ const CarPage = () => {
                                     ) : (
                                         <></>
                                     )}
+                                    
                                 </div>
+                                
                             ) : (
                                 <></>
                             );
@@ -237,9 +245,9 @@ const CarPage = () => {
                         })}
                     </div>
                 </div> :
-                //TODO: Take current review by id!!!!!
+                
                 <div>
-                    {/** currentReview is undefined */}
+                    
                     <AddReviewForm isEditable={true} reviewData={currentReview} />
                 </div>
 
