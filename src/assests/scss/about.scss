@@ -1,3 +1,4 @@
+@import "./variables.scss";
 .about-container {
     max-width: 800px;
     margin: 20px auto;
@@ -23,7 +24,7 @@
     font-size: 1.8rem;
     margin-top: 20px;
     margin-bottom: 15px;
-    border-bottom: 2px solid #e74c3c;
+    border-bottom: 2px solid $blue;
     display: inline-block;
     padding-bottom: 5px;
 }
