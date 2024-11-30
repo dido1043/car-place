@@ -9,31 +9,41 @@ function Header() {
     const [role, setRole] = useState(() => localStorage.getItem("role"));
     //!!!
     console.log(token);
-    
+
     const LogoutFn = () => {
         localStorage.clear()
         setToken(null);
-        renderMenu()   
-        Navigate('/');    
-        
+        renderMenu()
+        Navigate('/');
+
     };
     const deafaultMenu = [
         {
             path: "/register",
             name: "Register"
         },
+
         {
             path: '/login',
             name: 'Login'
+        },
+        {
+            path: "/about",
+            name: "About us"
         }
     ]
 
     const mainMenu = [
-      
+        {
+            path: "/about",
+            name: "About us"
+        },
+
         {
             path: "/allCars",
             name: "All"
         },
+
         {
             path: "/login",
             name: "Logout",
@@ -41,6 +51,10 @@ function Header() {
         }
     ]
     const adminMenu = [
+        {
+            path: "/about",
+            name: "About us"
+        },
         {
             path: "/cars/add",
             name: "Add"
@@ -50,8 +64,8 @@ function Header() {
             name: "All"
         },
         {
-            path:"/admin",
-            name:"Admin page"
+            path: "/admin",
+            name: "Admin page"
         },
         {
             path: "/login",
