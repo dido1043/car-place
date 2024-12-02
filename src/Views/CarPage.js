@@ -178,6 +178,9 @@ const CarPage = () => {
     const redirectToServiceRecords = (carId) =>{
         navigate(`/allCars/cars/serviceRecords/all/${carId}`)
     }
+    const redirectToAddServiceRecords = (carId) => {
+        navigate(`/allCars/cars/serviceRecords/add/${carId}`)
+    }
     return (
 
         <div>
@@ -196,6 +199,7 @@ const CarPage = () => {
                         <div className='buttons'>
                             <BaseButton onClick={toggleEdit} text="Edit" />
                             <button onClick={deleteCar} className='del-btn mt-2 mb-2'>Delete</button>
+                            <BaseButton onClick={() => redirectToAddServiceRecords(currentCarId)} text="Add Service Record"/>
                         </div> :
                         <>
 

@@ -20,6 +20,7 @@ import Users from './Views/Users';
 import ServiceRecords from './Views/ServiceRecords';
 import SortedCarsByPrice from './Views/SortedCarsByPrice';
 import AboutUs from './Views/AboutUs';
+import AddServiceRecord from './Views/AddServiceRecord';
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [role, setRole] = useState(() => localStorage.getItem('role'));
@@ -64,6 +65,7 @@ function App() {
                 <Route path="/allCars/cars/:id" element={<CarPage />} />
                 <Route path="/allCars/cars/rentrequests" element={<RentRequests />} />
                 <Route path="/allCars/cars/sorted" element={<SortedCarsByPrice/>}/>
+                <Route path="/allCars/cars/serviceRecords/add/:carId" element={<AddServiceRecord/>}/>
                 <Route path="/about" element={<AboutUs/>}/>
                 <Route path="/users" element={<Users />} />
                 <Route path="/admin" element={<AdminPage/>}/>

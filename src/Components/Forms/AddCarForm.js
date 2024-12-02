@@ -139,7 +139,7 @@ function AddCarForm({ isEditable, carData }) {
             console.log(error);
         }
     }
-    //Add styling to the image input
+    
     return (
         <div>
             <form onSubmit={isEditable ? editCar : handleSubmit}>
