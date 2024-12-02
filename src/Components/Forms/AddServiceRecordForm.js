@@ -67,7 +67,7 @@ function AddServiceRecordForm({ isEditable, recordData }) {
                     serviceDate: '',
                     serviceDetails: ''
                 })
-                nav('/allCars');
+                nav(`/allCars/cars/serviceRecords/all/${currentCarId}`);
             } catch (error) {
                 console.log(error);
 

@@ -65,6 +65,7 @@ function App() {
                 <Route path="/allCars/cars/:id" element={<CarPage />} />
                 <Route path="/allCars/cars/rentrequests" element={<RentRequests />} />
                 <Route path="/allCars/cars/sorted" element={<SortedCarsByPrice/>}/>
+                <Route path="/allCars/cars/serviceRecords/all/:carId" element={<ServiceRecords/>}/>
                 <Route path="/allCars/cars/serviceRecords/add/:carId" element={<AddServiceRecord/>}/>
                 <Route path="/about" element={<AboutUs/>}/>
                 <Route path="/users" element={<Users />} />
