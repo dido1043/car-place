@@ -18,8 +18,6 @@ function ServiceRecords() {
                 });
                 setRecords(response.data);
                 console.log(response.data);
-                //console.log(currentCarId);
-
 
             } catch (error) {
                 console.log(error);
