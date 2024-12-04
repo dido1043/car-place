@@ -200,9 +200,10 @@ const CarPage = () => {
                             <BaseButton onClick={toggleEdit} text="Edit" />
                             <button onClick={deleteCar} className='del-btn mt-2 mb-2'>Delete</button>
                             <BaseButton onClick={() => redirectToAddServiceRecords(currentCarId)} text="Add Service Record"/>
+                            <BaseButton onClick={() => redirectToServiceRecords(currentCarId)} text="Service records" />
                         </div> :
                         <>
-
+                            <BaseButton onClick={() => redirectToServiceRecords(currentCarId)} text="Service records" />
                         </>
                     }
 
@@ -220,7 +221,7 @@ const CarPage = () => {
                             <div className='flex flex-row gap-2'>
                                 <BaseButton onClick={navigateToAddReview} text="Add review"></BaseButton>
                                 <BaseButton onClick={handleRequest} text="Rent" />
-                                <BaseButton onClick={() => redirectToServiceRecords(currentCarId)} text="Service records" />
+                                
                             </div>
 
                         }
@@ -235,6 +236,7 @@ const CarPage = () => {
                                         <div className="flex flex-row">
                                             <BaseButton onClick={() => toggleEditReview(review)} text="Edit" className="mr-1.25" />
                                             <BaseButton onClick={() => deleteReview(review)} text="Delete" />
+                                            
                                         </div>
                                     ) : (
                                         <></>
