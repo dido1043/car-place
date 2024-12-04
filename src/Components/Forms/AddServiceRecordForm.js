@@ -5,10 +5,11 @@ import InputField from "../Shared/InputField";
 import axios from "axios";
 import BaseButton from "../Shared/BaseButton";
 function AddServiceRecordForm({ isEditable, recordData }) {
-        const path = window.location.pathname.split('/');
+    const path = window.location.pathname.split('/');
     const currentCarId = Number(path[path.length - 1]);
     console.log(currentCarId);
     const [records, setRecords] = useState({
+      
         carId: currentCarId,
         serviceDate: '',
         serviceDetails: ''
@@ -16,10 +17,11 @@ function AddServiceRecordForm({ isEditable, recordData }) {
     const [errors, setErrors] = useState({})
     const nav = useNavigate();
 
-    
+
     useEffect(() => {
         if (isEditable) {
             setRecords({
+               
                 carId: currentCarId,
                 serviceDate: recordData.serviceDate,
                 serviceDetails: recordData.serviceDetails
@@ -76,9 +78,28 @@ function AddServiceRecordForm({ isEditable, recordData }) {
             setErrors(recordErrors);
         }
     }
+
+    const editServiceRecord = async (e) => {
+        e.preventDefault();
+        console.log(recordData.id);
+
+        try {
+            const response = await axios.put(`${process.env.REACT_APP_API_KEY}/cars/records/edit/${recordData.id}`, records, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*'
+                }
+            })
+            nav(`/allCars`)
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
+
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={isEditable == true ? editServiceRecord : handleSubmit}>
                 <Label text="Service Details" />
                 <InputField
                     value={records.serviceDetails}
@@ -97,7 +118,7 @@ function AddServiceRecordForm({ isEditable, recordData }) {
                     type="date"
                     error={errors.serviceDate}
                 />
-                <BaseButton text="Add" type="submit" />
+                <BaseButton text={isEditable ? "Edit" : "Add"} type="submit" />
             </form>
 
         </div>
