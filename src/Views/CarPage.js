@@ -181,6 +181,13 @@ const CarPage = () => {
     const redirectToAddServiceRecords = (carId) => {
         navigate(`/allCars/cars/serviceRecords/add/${carId}`)
     }
+    //Car Features
+    const redirectToCarFeatures = (carId) =>{
+        navigate(`/allCars/cars/features/all/${carId}`)
+    }
+    const redirectToAddCarFeatures = (carId) => {
+        navigate(`/allCars/cars/features/add/${carId}`)
+    }
     return (
 
         <div>
@@ -201,9 +208,13 @@ const CarPage = () => {
                             <button onClick={deleteCar} className='del-btn mt-2 mb-2'>Delete</button>
                             <BaseButton onClick={() => redirectToAddServiceRecords(currentCarId)} text="Add Service Record"/>
                             <BaseButton onClick={() => redirectToServiceRecords(currentCarId)} text="Service records" />
+                            <BaseButton onClick={() => redirectToAddCarFeatures(currentCarId)} text="Add feature"/>
+                            <BaseButton onClick={() => redirectToCarFeatures(currentCarId)} text="Car features" />
+                        
                         </div> :
                         <>
                             <BaseButton onClick={() => redirectToServiceRecords(currentCarId)} text="Service records" />
+                            <BaseButton onClick={() => redirectToCarFeatures(currentCarId)} text="Car features" />
                         </>
                     }
 
