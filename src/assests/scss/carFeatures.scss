@@ -1,0 +1,13 @@
+.container-features h2{
+    text-align: center;
+}
+.box-features{
+    padding: 10px 10px;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+.box-features > div{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}

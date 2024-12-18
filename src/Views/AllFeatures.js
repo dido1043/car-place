@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import BaseButton
- from "../Components/Shared/BaseButton";
+import BaseButton from "../Components/Shared/BaseButton";
 import AddFeatureForm from "../Components/Forms/AddFeatureForm";
+import '../assests/scss/carFeatures.scss'
 function AllFeatures() {
     const pathParts = window.location.pathname.split('/');
     const currentCarId = pathParts[pathParts.length - 1];
