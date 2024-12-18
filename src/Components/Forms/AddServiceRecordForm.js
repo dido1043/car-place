@@ -9,7 +9,6 @@ function AddServiceRecordForm({ isEditable, recordData }) {
     const currentCarId = Number(path[path.length - 1]);
     console.log(currentCarId);
     const [records, setRecords] = useState({
-      
         carId: currentCarId,
         serviceDate: '',
         serviceDetails: ''
@@ -21,7 +20,6 @@ function AddServiceRecordForm({ isEditable, recordData }) {
     useEffect(() => {
         if (isEditable) {
             setRecords({
-               
                 carId: currentCarId,
                 serviceDate: recordData.serviceDate,
                 serviceDetails: recordData.serviceDetails

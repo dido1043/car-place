@@ -20,6 +20,8 @@ import ServiceRecords from './Views/ServiceRecords';
 import SortedCarsByPrice from './Views/SortedCarsByPrice';
 import AboutUs from './Views/AboutUs';
 import AddServiceRecord from './Views/AddServiceRecord';
+import AllFeatures from './Views/AllFeatures';
+import AddFeature from './Views/AddFeature';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -66,6 +68,8 @@ function App() {
                 <Route path="/allCars/cars/sorted" element={<SortedCarsByPrice/>}/>
                 <Route path="/allCars/cars/serviceRecords/all/:carId" element={<ServiceRecords/>}/>
                 <Route path="/allCars/cars/serviceRecords/add/:carId" element={<AddServiceRecord/>}/>
+                <Route path="/allCars/cars/features/all/:carId" element= {<AllFeatures/>}/>
+                <Route path="/allCars/cars/features/add/:carId" element= {<AddFeature/>}/>
                 <Route path="/about" element={<AboutUs/>}/>
                 <Route path="/users" element={<Users/>} />
                 <Route path="/admin" element={<AdminPage/>}/>
@@ -77,6 +81,7 @@ function App() {
                 <Route path="/allCars/cars/:id" element={<CarPage/>}/>
                 <Route path="/allCars/cars/reviews/add/:carId" element = {<AddReview/>}/>
                 <Route path="/allCars/cars/serviceRecords/all/:carId" element={<ServiceRecords/>}/>
+                <Route path="/allCars/cars/features/all/:carId" element= {<AllFeatures/>}/>
                 <Route path="/allCars/cars/sorted" element={<SortedCarsByPrice/>}/>
                 <Route path="/about" element={<AboutUs/>}/>
                 <Route path="*" element={<NotFoundPage/>} /> 
